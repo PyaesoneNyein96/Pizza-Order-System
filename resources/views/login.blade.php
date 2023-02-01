@@ -2,7 +2,14 @@
 
 @section('title', 'Log-in')
 @section('content')
+    <div class="login-logo">
+        <a href="#" class="text-decoration-none">
+            <img src="{{ asset('admin/images/icon/pizza.png') }}" class="w-75 shadow-sm" alt="CoolAdmin">
+            <h3 class="brand-font text-orange">Pizza Galaxy Login</h3>
+        </a>
+    </div>
     <div class="login-form">
+
         <form action="{{ route('login') }}" method="post">
             @csrf
             <div class="form-group">

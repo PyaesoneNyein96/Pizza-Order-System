@@ -34,6 +34,11 @@
     <link href="{{ asset('admin/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.') }}css" rel="stylesheet" media="all">
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Gemstones&display=swap" rel="stylesheet">
+
     <!-- Main CSS-->
     <link href="{{ asset('admin/css/theme.css') }}" rel="stylesheet" media="all">
 
@@ -44,8 +49,9 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin" />
+                <a href="#" class="text-decoration-none d-flex align-items-center ">
+                    <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 30px"; alt="Cool Admin" />
+                    <span class="h3 brand-font text-danger mt-2"> Pizza Galaxy</span>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -73,14 +79,14 @@
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
+            <header class="header-desktop" style="opacity: 0.85">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <h3 class="text-info">
+                                <h4 class="text-info">
                                     Admin Dashboard
-                                </h3>
+                                </h4>
                                 {{-- <input class="au-input au-input--xl" type="text" name="search"
                                     placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">

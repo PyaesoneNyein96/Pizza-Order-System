@@ -48,6 +48,15 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 
+.brand-font {
+    font-family: "Rubik Gemstones", cursive;
+}
+
+.text-orange {
+    color: rgba(232, 95, 3, 0.774);
+    text-shadow: 1px 1px 0.2px rgb(199, 208, 152);
+}
+
 ul {
     margin: 0;
 }

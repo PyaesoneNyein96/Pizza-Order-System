@@ -32,9 +32,15 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'
             return view('admin.admin-dashboard');
         })->name('admin@dashboard');
 
-        Route::get('/category/list',function(){
-            return view('admin.category.list');
-        })->name('admin@categoryList');
+
+        Route::prefix('category')->group(function () {
+
+            Route::get('list', [CategoryController::class,'list'])->name('admin@categoryList');
+            Route::get('createPage',[CategoryController::class,'createCategoryPage'])->name('admin@CreateCategoryPage');
+            Route::post('create',[CategoryController::class,'createCategories'])->name('admin@CreateCategory');
+            Route::get('delete/{id}',[ CategoryController::class,'deleteCategory'])->name('admin@DeleteCategory');
+
+        });
 
 
 });

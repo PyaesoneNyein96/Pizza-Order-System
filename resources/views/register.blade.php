@@ -4,6 +4,14 @@
 
 @section('content')
     <div class="container" style="margin-bottom: 200px">
+        <div class="login-logo">
+            <a href="#" class="text-decoration-none">
+                <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 50px" class="shadow rounded"
+                    alt="CoolAdmin">
+                <span class="h3 brand-font text-orange">Pizza Galaxy</span>
+                <span class="h4 brand-font d-block text-orange">Registration Form</span>
+            </a>
+        </div>
         <div class="login-form">
             <form action="{{ route('register') }}" method="post">
                 @csrf

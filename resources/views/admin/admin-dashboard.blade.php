@@ -13,7 +13,9 @@
     <div class="container">
         <h1>Admin Dashboard</h1>
         <h4>Role --{{ Auth::user()->role }}</h4>
-
+        <a href="{{ route('admin@categoryList') }}">
+            <button class="btn info">Go to List</button>
+        </a>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button class="btn secondary">Logout</button>

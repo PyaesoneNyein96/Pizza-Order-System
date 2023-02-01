@@ -37,6 +37,9 @@
     <link href="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.') }}css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Gemstones&display=swap" rel="stylesheet">
     <link href="{{ asset('admin/css/theme.css') }}" rel="stylesheet" media="all">
 
 </head>
@@ -47,11 +50,12 @@
             <div class="container">
                 <div class="login-wrap ">
                     <div class="login-content">
-                        <div class="login-logo">
+                        {{-- <div class="login-logo">
                             <a href="#">
-                                <img src="{{ asset('admin/images/icon/logo.png') }}" alt="CoolAdmin">
+                                <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 50px"
+                                    alt="CoolAdmin">
                             </a>
-                        </div>
+                        </div> --}}
                         @yield('content')
 
                     </div>
