@@ -21,7 +21,7 @@ class AuthController extends Controller
     // User Dashboard Direction
 
     public function authDashboard(){
-        if(Auth::user()->role == 'admin'){
+        if(Auth::user()->role == 'admin' || Auth::user()->role == 'super'){
             return redirect()->route('admin@dashboard');
         }else{
             return redirect()->route('user@home');

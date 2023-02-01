@@ -32,9 +32,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'
             return view('admin.admin-dashboard');
         })->name('admin@dashboard');
 
-        Route::get('/category',function(){
+        Route::get('/category/list',function(){
             return view('admin.category.list');
         })->name('admin@categoryList');
+
+
 });
 
 // =====USER=====

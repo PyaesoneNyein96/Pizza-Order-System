@@ -1624,8 +1624,15 @@ section {
     padding: 15px 25px;
     font-size: 14px;
 }
+.logout-custom {
+    display: block;
+    color: #333;
+    padding: 15px 25px;
+    font-size: 14px;
+}
 
-.account-dropdown__footer a:hover {
+.account-dropdown__footer a:hover,
+.logout-custom:hover {
     background: #4272d7;
     color: #fff;
 }
