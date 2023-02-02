@@ -13,7 +13,13 @@ class CategoryController extends Controller
     // Show all category
     // ----------------
     public function list(){
-        $data = Category::orderBy('category_id','desc')->paginate(5);
+
+        $data = Category::when(request('searchValue'),function($i){
+            $key = request('searchValue');
+            $i->where('name','like','%'.$key.'%');
+        })->orderBy('created_at','desc')->paginate(5);
+
+        $data->appends(request()->all());
         // dd($data);
         return view('admin.category.category-list',compact('data'));
     }
@@ -53,8 +59,15 @@ class CategoryController extends Controller
     }
 
 
+    public function editPage($id){
+        $editData = Category::where('category_id', $id)->first();
+        return view('admin.category.category-edit',compact('editData'));
+    }
 
 
+    public function update(Request $req, $id){
+        dd($req->all(), $id);
+    }
 
 
 

@@ -1,4 +1,4 @@
-@extends('admin.layout.category-master')
+@extends('admin.category.category-master')
 
 
 @section('title', 'dashboard-category')
@@ -57,14 +57,21 @@
                                 Total Category : <span class="badge badge-pill px-2 rounded-circle h5 bg-info">
                                     {{ $data->total() }}
                                 </span>
+                                <div> Search Key :
+                                    <span class="text-danger">
+                                        {{ request('searchValue') }}
+                                    </span>
+                                </div>
                                 <hr>
                             </div>
 
+
                             <div class="col-md-5 col-6 searching">
-                                <form action="" method="POST" class="d-flex">
+                                <form action="{{ route('admin@categoryList') }}" method="get" class="d-flex">
                                     <input type="text" class="shadow-none rounded form-control form-control-sm"
-                                        title="Search here !" placeholder="Search . . .">
-                                    <button class="btn btn-outline-info rounded-circle mx-2 bg-light"><i
+                                        value="{{ request('searchValue') }}" name="searchValue" title="Search here !"
+                                        placeholder="Search . . .">
+                                    <button type="submit" class="btn btn-outline-info rounded-circle mx-2 bg-dark"><i
                                             class="fa fa-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
@@ -84,8 +91,9 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $item)
-                                        <tr class="tr-shadow">
-                                            <td>{{ $loop->index + 1 }}</td>
+                                        <tr class="tr-shadow" title="{{ $item->name }}">
+                                            {{-- {{ $loop->index + $Blogs->firstItem()  }} --}}
+                                            <td>{{ $loop->index + $data->firstItem() }}</td>
                                             <td>
                                                 <span>{{ $item->name }}</span>
                                             </td>
@@ -95,24 +103,27 @@
                                             </td>
                                             <td class="bg-light ">
                                                 <div class="table-data-feature d-flex justify-content-center">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top"
+                                                    {{-- <button class="item" data-toggle="tooltip" data-placement="top"
                                                         title="Send">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="Edit">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
+                                                    </button> --}}
+
+                                                    <a href="{{ route('admin@EditCategory', $item->category_id) }}">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                    </a>
                                                     <a href="{{ route('admin@DeleteCategory', $item->category_id) }}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Delete">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                     </a>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top"
+                                                    {{-- <button class="item" data-toggle="tooltip" data-placement="top"
                                                         title="More">
                                                         <i class="zmdi zmdi-more"></i>
-                                                    </button>
+                                                    </button> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -125,6 +136,7 @@
                             </table>
                             <div class="paginate">
                                 {{ $data->links() }}
+                                {{-- {{ $data->appends(request()->query())->links() }} --}}
                             </div>
                         @else
                             <div class="py-3 mt-5 d-flex justify-content-center">

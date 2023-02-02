@@ -18,14 +18,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h3 class="text-center title-2">Create Categories</h3>
+                                <h3 class="text-center title-2">Edit Categories</h3>
                             </div>
                             <hr>
-                            <form action="{{ route('admin@CreateCategory') }}" method="post" novalidate="novalidate">
+                            <form action="{{ route('admin@UpdateCategory', $editData->category_id) }}" method="post"
+                                novalidate="novalidate">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="control-label mb-1">Name</label>
+                                    <label class="control-label mb-1">Update Name</label>
                                     <input id="cc-pament" name="categoryName" type="text"
+                                        value="{{ $editData->name ?? old('categoryName') }}"
                                         class="form-control @error('categoryName') is-invalid @enderror"
                                         placeholder="Categories...">
 
@@ -38,8 +40,8 @@
 
                                 <div>
                                     <button id="payment-button" type="submit"
-                                        class="btn btn-lg btn-info btn-block mt-4 text-light rounded">
-                                        <span id="payment-button-amount">Create
+                                        class="btn btn-lg btn-primary btn-block mt-4 text-light rounded">
+                                        <span id="payment-button-amount">Update
                                             <i class="fa fa-upload" aria-hidden="true"></i>
                                         </span>
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
