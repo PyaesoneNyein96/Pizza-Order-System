@@ -30,26 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="sms-wrap">
-                        @if (session('msg'))
-                            <div class="col-md-5 float-end alert alert-success alert-dismissible fade show" role="alert">
-                                <span class="text-success small">{{ session('msg') }} <i class="fa fa-check"
-                                        aria-hidden="true"></i></sp>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if (session('Delmsg'))
-                            <div class="col-md-5 float-end alert alert-warning alert-dismissible text-center fade show"
-                                role="alert">
-                                <span class="text-success small">{{ session('Delmsg') }}
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
-                    </div>
+
 
                     <div class="table-responsive table-responsive-data2 text-center">
                         <div class="d-flex row justify-content-between ">
@@ -62,9 +43,7 @@
                                         {{ request('searchValue') }}
                                     </span>
                                 </div>
-                                <hr>
                             </div>
-
 
                             <div class="col-md-5 col-6 searching">
                                 <form action="{{ route('admin@categoryList') }}" method="get" class="d-flex">
@@ -75,6 +54,39 @@
                                             class="fa fa-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
+                        </div>
+                        <hr>
+                        <div class="sms-wrap">
+                            @if (session('msg'))
+                                <div class="col-md-5 float-end alert alert-success alert-dismissible fade show"
+                                    role="alert">
+                                    <span class="text-success small">{{ session('msg') }} <i class="fa fa-check"
+                                            aria-hidden="true"></i></sp>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if (session('Delmsg'))
+                                <div class="col-md-5 float-end alert alert-warning alert-dismissible text-center fade show"
+                                    role="alert">
+                                    <span class="text-success small">{{ session('Delmsg') }}
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if (session('updateMsg'))
+                                <div class="col-md-5 float-end alert alert-warning alert-dismissible text-center fade show"
+                                    role="alert">
+                                    <span class="text-success small">{{ session('updateMsg') }}
+                                        {{-- <i class="fas fa-check-double"></i>
+                                        <i class="fab fa-check-double    "></i> --}}
+                                    </span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
                         </div>
 
 
@@ -108,13 +120,14 @@
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </button> --}}
 
-                                                    <a href="{{ route('admin@EditCategory', $item->category_id) }}">
+                                                    <a href="{{ route('admin@EditCategory', $item->id) }}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="{{ route('admin@DeleteCategory', $item->category_id) }}">
+                                                    <a class="mx-2"
+                                                        href="{{ route('admin@DeleteCategory', $item->id) }}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Delete">
                                                             <i class="zmdi zmdi-delete"></i>

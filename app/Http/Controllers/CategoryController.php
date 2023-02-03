@@ -38,7 +38,7 @@ class CategoryController extends Controller
     // ----------------
     public function createCategories(Request $req){
 
-    $this->validateCategory($req);
+    $this->createValidateCategory($req);
     $name = $req->categoryName;
     Category::create($this->dataCollet($req));
         return redirect()->route('admin@categoryList')
@@ -49,9 +49,9 @@ class CategoryController extends Controller
     // Delete Category
     // ----------------
     public function deleteCategory($id){
-        $category = Category::where('category_id',$id);
+        $category = Category::where('id',$id);
 
-        $name = Category::where('category_id',$id)->pluck('name');
+        $name = Category::where('id',$id)->pluck('name');
         $name = $name[0];
         $category->delete();
         return redirect()->route('admin@categoryList')
@@ -60,31 +60,43 @@ class CategoryController extends Controller
 
 
     public function editPage($id){
-        $editData = Category::where('category_id', $id)->first();
+        $editData = Category::where('id', $id)->first();
+        // dd($editData->toArray());
         return view('admin.category.category-edit',compact('editData'));
     }
 
 
-    public function update(Request $req, $id){
-        dd($req->all(), $id);
-    }
+    public function updateCategory(Request $req, $id){
+        $req['id'] = $id;
+        // dd($req->all());
+        $this->validateCategory($req);
+        $data = $this->dataCollet($req);
+        Category::where('id',$id)->update($data);
+        return redirect()->route('admin@categoryList')->with('updateMsg', 'Category update successfully!');
 
+    }
 
 
 // &&&&&&&&&&&&&&&
             // Validation and Data Collect <><><><><><><><><>
 // &&&&&&&&&&&&&&&
-
+    private function createValidateCategory($req){
+        Validator::make($req->all(),
+        [ 'categoryName' => 'required|unique:categories,name'],
+        ['categoryName.required' => 'Category name is required !!!'])->validate();
+    }
 
     private function validateCategory($req){
+        // dd($req->id);
       Validator::make($req->all(),
-      [ 'categoryName' => 'required|unique:categories,name'],
+      [ 'categoryName' => 'required|unique:categories,name,'.$req->id],
       ['categoryName.required' => 'Category name is required !!!'])->validate();
     }
 
     private function dataCollet($req){
         return [
             'name' =>$req->categoryName,
+
         ];
     }
 }
