@@ -1606,17 +1606,30 @@ section {
     padding: 15px 25px;
     font-size: 14px;
 }
+.account-dropdown__item form {
+    display: block;
+    color: #333;
+    padding: 15px 25px;
+    font-size: 14px;
+}
 
 .account-dropdown__item a:hover {
     background: #4272d7;
     color: #fff;
 }
 
+.account-dropdown__item form:hover{
+    background: #4272d7;
+    color: #fff;
+}
+
+
 .account-dropdown__item a i {
     line-height: 1;
     margin-right: 20px;
     font-size: 18px;
     vertical-align: middle;
+    width:10px;
 }
 
 .account-dropdown__body {

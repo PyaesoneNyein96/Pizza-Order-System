@@ -16,6 +16,8 @@ Route::redirect('/', 'auth/login');
 Route::prefix('auth')->group(function () {
     Route::get('login',[ AuthController::class,'loginPage'])->name('auth@login');
     Route::get('register',[AuthController::class,'registerPage'])->name('auth@register');
+    Route::get('passChangePage', [AuthController::class,'passwordChangePage'])->name('auth@changePage');
+    Route::post('changePass',[AuthController::class,'changePass'])->name('change@pass');
 
 });
 
@@ -52,7 +54,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'
         Route::get('/home', function(){
             return view('user.userHome');
         })->name('user@home');
+
+
     });
+
+
 
 
 

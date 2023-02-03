@@ -17,6 +17,22 @@ class AuthController extends Controller
         return view('register');
     }
 
+    // Pass Change Page
+    public function passwordChangePage(){
+        return view('user.password.passwordChange');
+    }
+
+    public function changePass(){
+        dd('xxx');
+    }
+
+
+
+
+
+
+
+
 
     // User Dashboard Direction
 

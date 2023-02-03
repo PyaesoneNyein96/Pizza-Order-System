@@ -1,4 +1,4 @@
-@extends('admin.category.category-master')
+@extends('admin.admin-master')
 
 
 @section('title', 'dashboard-category')

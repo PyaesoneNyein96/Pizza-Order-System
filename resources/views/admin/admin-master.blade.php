@@ -149,9 +149,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                        <div
-                                            class="account-dropdown
-                                                    js-dropdown">
+                                        <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
@@ -172,16 +170,22 @@
                                                         <i class="zmdi zmdi-account"></i>Account
                                                     </a>
                                                 </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('auth@changePage') }}">
+                                                        <i class="zmdi zmdi-key"></i>
+                                                        Change Password
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="account-dropdown__footer">
-                                                <form action="{{ route('logout') }}" method="POST"
-                                                    class="logout-custom mx-0 px-0">
-                                                    @csrf
-                                                    <button class="btn mx-0 px-0" type="submit">
-                                                        <i class="zmdi zmdi-power mx-4"></i>Logout
-                                                    </button>
 
-                                                </form>
+                                            <div class="account-dropdown__footer">
+                                                <button class="btn mx-0 px-0 w-100" type="submit">
+                                                    <form action="{{ route('logout') }}" method="POST"
+                                                        class="logout-custom mx-0 px-0 text-start">
+                                                        @csrf
+                                                        <i class="zmdi zmdi-power mx-4"></i>Logout
+                                                    </form>
+                                                </button>
 
 
                                             </div>
