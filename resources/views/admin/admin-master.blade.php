@@ -57,6 +57,11 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a href="{{ route('admin@dashboard') }}" class="text-decoration-none">
+                                {{-- <i class="fas fa-chart-bar"></i>Customers</a> --}}
+                                <i class="fa fa-list" aria-hidden="true"></i> Dashboard</a>
+                        </li>
                         {{-- <li class="active has-sub">
                             <a class="js-arrow" href="index.html">
                                 <i class="fas fa-tachometer-alt"></i>Home Page
@@ -66,10 +71,7 @@
                             <a href="{{ route('admin@categoryList') }}" class="text-decoration-none">
                                 <i class="fa fa-list" aria-hidden="true"></i> Category</a>
                         </li>
-                        {{-- <li>
-                            <a href="customerList.html">
-                                <i class="fas fa-chart-bar"></i>Customers</a>
-                        </li> --}}
+
                     </ul>
                 </nav>
             </div>
@@ -179,13 +181,15 @@
                                             </div>
 
                                             <div class="account-dropdown__footer">
-                                                <button class="btn mx-0 px-0 w-100" type="submit">
-                                                    <form action="{{ route('logout') }}" method="POST"
-                                                        class="logout-custom mx-0 px-0 text-start">
-                                                        @csrf
-                                                        <i class="zmdi zmdi-power mx-4"></i>Logout
-                                                    </form>
-                                                </button>
+                                                <form action="{{ route('logout') }}" method="POST"
+                                                    class="logout-custom ">
+                                                    <div class="btn-wrap ">
+                                                        <button class="btn mx-0 px-0" type="submit">
+                                                            @csrf
+                                                            <i class="zmdi zmdi-power me-3"></i>Logout
+                                                        </button>
+                                                    </div>
+                                                </form>
 
 
                                             </div>

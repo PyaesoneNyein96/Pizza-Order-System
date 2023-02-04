@@ -22,8 +22,8 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'
-])->group(function () {
+Route::middleware(['auth'])->group(function () {
+
 
     Route::get('dashboard',[AuthController::class,'authDashboard']);
 

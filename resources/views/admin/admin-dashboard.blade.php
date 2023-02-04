@@ -1,28 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('admin.admin-master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Dashboard</title>
-</head>
+@section('title', 'dashboard')
 
-<body>
 
-    <div class="container">
-        <h1>Admin Dashboard</h1>
-        <h4>Role --{{ Auth::user()->role }}</h4>
-        <a href="{{ route('admin@categoryList') }}">
-            <button class="btn info">Go to List</button>
-        </a>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button class="btn secondary">Logout</button>
-        </form>
+@section('content')
+
+
+
+
+
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <!-- DATA TABLE -->
+
+
+
+                    <div class="container">
+                        <h1>Admin Dashboard</h1>
+                        <h4>Role --{{ Auth::user()->role }}</h4>
+                        <a href="{{ route('admin@categoryList') }}" class="mb-2">
+                            <button class="btn btn-info">Go to List</button>
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-secondary">Logout</button>
+                        </form>
+                    </div>
+
+
+                    <!-- END DATA TABLE -->
+                </div>
+            </div>
+        </div>
     </div>
-
-
-</body>
-
-</html>
+@endsection
