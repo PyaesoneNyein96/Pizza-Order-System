@@ -60,7 +60,7 @@
                         <li>
                             <a href="{{ route('admin@dashboard') }}" class="text-decoration-none">
                                 {{-- <i class="fas fa-chart-bar"></i>Customers</a> --}}
-                                <i class="fa fa-list" aria-hidden="true"></i> Dashboard</a>
+                                <i class="fa fa-laptop" aria-hidden="true"></i> Dashboard</a>
                         </li>
                         {{-- <li class="active has-sub">
                             <a class="js-arrow" href="index.html">
@@ -140,8 +140,17 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                alt="John Doe" />
+                                            @if (Auth::user()->image == null && Auth::user()->gender == 'male')
+                                                <img src="{{ asset('image/avators/images.jpg') }}"
+                                                    class=" rounded-circle" />
+                                            @elseif (Auth::user()->image == null && Auth::user()->gender == 'female')
+                                                <img src="{{ asset('image/avators/female.jpg') }}"
+                                                    class=" rounded-circle" />
+                                            @elseif(Auth::user()->image == null)
+                                                <img src="{{ asset('image/avators/genderless.jpg') }}"
+                                                    alt="">
+                                            @endif
+
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn text-decoration-none"
@@ -155,8 +164,14 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                            alt="John Doe" />
+                                                        @if (Auth::user()->image == null && Auth::user()->gender == 'male')
+                                                            <img src="{{ asset('image/avators/images.jpg') }}" />
+                                                        @elseif (Auth::user()->image == null && Auth::user()->gender == 'female')
+                                                            <img src="{{ asset('image/avators/female.jpg') }}" />
+                                                        @elseif(Auth::user()->image == null)
+                                                            <img src="{{ asset('image/avators/genderless.jpg') }}"
+                                                                alt="">
+                                                        @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -168,7 +183,7 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="{{ route('admin@profile') }}">
                                                         <i class="zmdi zmdi-account"></i>Account
                                                     </a>
                                                 </div>

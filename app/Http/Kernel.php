@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\basicAuth;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\isUserMiddleware;
 use App\Http\Middleware\isAdminMiddleware;
@@ -68,6 +69,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => isAdminMiddleware::class,
         'isUser' => isUserMiddleware::class,
+        'basicAuth' =>basicAuth::class
 
     ];
 }

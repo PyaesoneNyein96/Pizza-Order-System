@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class="container" style="margin-bottom: 200px">
+    <div class="containe" style="margin-bottom: 200px">
         <div class="login-logo">
             <a href="#" class="text-decoration-none">
                 <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 50px" class="shadow rounded"
@@ -33,9 +33,25 @@
                         </small>
                     @enderror
                 </div>
+
                 <div class="form-group m-b-10">
                     <label>Email Address</label>
                     <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                    @error('email')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                </div>
+
+                <div class="form-group m-b-10">
+                    <label>Gender</label>
+                    <select name="gender" class="form-select">
+                        <option value="#" selected hidden disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="null ">Unknown</option>
+                    </select>
                     @error('email')
                         <small class="text-danger">
                             {{ $message }}

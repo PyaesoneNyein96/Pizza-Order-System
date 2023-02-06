@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isAdminMiddleware
+class basicAuth
 {
     /**
      * Handle an incoming request.
@@ -17,17 +17,22 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(Auth::check()){
-        //     if(Auth::user()->role == 'admin'|| Auth::user()->role == 'super' ){
-        //         return redirect()->route('admin@dashboard');
-        //     }
-        //     return back();
-        // }
 
-        if(Auth::user()->role == 'user'){
-            return redirect()->route('user@home');
-            // return abort(404);
+        if(!Auth::check() && url()->current() == route('auth@changePage')){
+            return back();
         }
+
+       if(Auth::check()){
+            if(
+                url()->current() == route('auth@login') ||
+                url()->current() == route('auth@register'))
+                {
+
+                    return back();
+            }
+
+       }
+
         return $next($request);
     }
 }

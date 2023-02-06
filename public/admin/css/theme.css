@@ -57,6 +57,10 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     text-shadow: 1px 1px 0.2px rgb(199, 208, 152);
 }
 
+.w-90 {
+    width: 90% !important;
+}
+
 ul {
     margin: 0;
 }
@@ -347,7 +351,7 @@ section {
 
 .login-wrap {
     max-width: 540px;
-    padding-top: 4vh;
+    padding-top: 1vh;
     margin: 0 auto;
 }
 
@@ -1618,18 +1622,17 @@ section {
     color: #fff;
 }
 
-.account-dropdown__item form:hover{
+.account-dropdown__item form:hover {
     background: #4272d7;
     color: #fff;
 }
-
 
 .account-dropdown__item a i {
     line-height: 1;
     margin-right: 20px;
     font-size: 18px;
     vertical-align: middle;
-    width:10px;
+    width: 10px;
 }
 
 .account-dropdown__body {

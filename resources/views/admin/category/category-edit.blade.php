@@ -21,6 +21,7 @@
                                 <h3 class="text-center title-2">Edit Categories</h3>
                             </div>
                             <hr>
+
                             <form action="{{ route('admin@UpdateCategory', $editData->id) }}" method="post"
                                 novalidate="novalidate">
                                 @csrf

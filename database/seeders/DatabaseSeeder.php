@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'psn@gmail.com',
             'password' =>Hash::make('admin123'),
+            'gender' => 'male',
             'role' => 'admin',
             'phone' => '123',
             'address' => 'yangon'
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'superAdmin',
             'email' => 'superAdmin@gmail.com',
             'password' =>Hash::make('admin123'),
+            'gender' => 'female',
             'role' => 'super',
             'phone' => '123',
             'address' => 'yangon'

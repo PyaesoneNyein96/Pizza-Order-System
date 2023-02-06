@@ -13,39 +13,20 @@ class AuthController extends Controller
     //  Direct login Page
         // User Dashboard Direction
 
-    public function authDashboard(){
-        if(Auth::user()->role == 'admin' || Auth::user()->role == 'super'){
-            return redirect()->route('admin@dashboard');
-            }else{
-                return redirect()->route('user@home');
-            }
-        }
+
 
     public function loginPage(){
-        if(Auth::check()){
-            if(Auth::user()->role == 'admin'){
-                return redirect()->route('admin@dashboard');
-            }else if( Auth::user()->role == 'user'){
-                return  redirect()->route('user@home');
-            }
-        }
         return view('login');
     }
 
     // Direct Register Page
     public function registerPage(){
-        if(!Auth::check()){
             return view('register');
-        }
-        return back();
     }
 
     // Pass Change Page
     public function passwordChangePage(){
-        if(!Auth::check() ){
-            return back();
-        }
-        return view('user.password.passwordChange');
+        return view('All-User.password.passwordChange');
     }
 
     //PASSWORD Changing method
