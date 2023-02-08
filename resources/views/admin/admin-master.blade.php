@@ -58,8 +58,8 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li>
-                            <a href="{{ route('admin@dashboard') }}" class="text-decoration-none">
-                                {{-- <i class="fas fa-chart-bar"></i>Customers</a> --}}
+                            <a href="{{ route('admin@dashboard') }}"
+                                class="text-decoration-none @if (url()->current() == route('admin@dashboard')) text-danger @endif">
                                 <i class="fa fa-laptop" aria-hidden="true"></i> Dashboard</a>
                         </li>
                         {{-- <li class="active has-sub">
@@ -68,8 +68,18 @@
                             </a>
                         </li> --}}
                         <li>
-                            <a href="{{ route('admin@categoryList') }}" class="text-decoration-none">
+                            <a href="{{ route('admin@categoryList') }}"
+                                class="text-decoration-none
+                            @if (url()->current() == route('admin@categoryList')) text-danger @endif">
                                 <i class="fa fa-list" aria-hidden="true"></i> Category</a>
+                        </li>
+                        <li>
+
+                            <a href="{{ route('admin@productList') }}"
+                                class="text-decoration-none @if (url()->current() == route('admin@productList')) text-danger @endif">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                                Product
+                            </a>
                         </li>
 
                     </ul>
@@ -87,7 +97,7 @@
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
                                 <h4 class="text-info">
-                                    Admin Dashboard
+                                    @yield('title')
                                 </h4>
                                 {{-- <input class="au-input au-input--xl" type="text" name="search"
                                     placeholder="Search for datas &amp; reports..." />
@@ -150,6 +160,7 @@
                                                 <img src="{{ asset('image/avators/genderless.jpg') }}"
                                                     alt="">
                                             @endif
+                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="">
 
                                         </div>
                                         <div class="content">
@@ -172,6 +183,8 @@
                                                             <img src="{{ asset('image/avators/genderless.jpg') }}"
                                                                 alt="">
                                                         @endif
+                                                        <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                            alt="">
                                                     </a>
                                                 </div>
                                                 <div class="content">

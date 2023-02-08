@@ -1,7 +1,7 @@
 @extends('admin.admin-master')
 
 
-@section('title', 'profile')
+@section('title', 'Admin Profile')
 
 @section('content')
     <div class="main-content ">
@@ -11,7 +11,8 @@
                     <!-- PROFILE -->
 
                     <div class="card text-left bg-transparent shadow">
-                        <form action="{{ route('admin@profileEdit', Auth::id()) }}" method="post" class=" m-3 p-3">
+                        <form action="{{ route('admin@profileEdit', Auth::id()) }}" method="post" class=" m-3 p-3"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-3">
@@ -23,16 +24,27 @@
                                         @elseif(Auth::user()->image == null)
                                             <img src="{{ asset('image/avators/genderless.jpg') }}" alt="">
                                         @endif
+                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
+                                            id='profile'>
                                         {{-- ========== --}}
                                     </div>
                                     <div class="upload-img-wrap p-1 mx-3">
                                         @if ($switch == 'true')
-                                            <input type="file" id="img"
+                                            <input type="file" id="img" name="image"
+                                                onchange="document.getElementById('profile').src=window.URL.createObjectURL(this.files[0])"
                                                 class="d-none form-control form-control-sm my-2">
                                             <label for="img" style="cursor: pointer"
-                                                class="text-success border border-success p-2 small shadow rounded">
+                                                class="text-success border border-success p-2 small shadow rounded
+                                                @error('image')
+                                                    border border-danger
+                                                @enderror">
                                                 Select Profile Image
                                             </label>
+                                            @error('image')
+                                                <small class="text-danger text-center">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
                                         @endif
                                     </div>
                                 </div>
@@ -86,8 +98,8 @@
                                             <option value="female" @if (Auth::user()->gender == 'female') selected @endif>
                                                 Female
                                             </option>
-                                            <option value="null" @if (Auth::user() == null) selected @endif>
-                                                - Unknown
+                                            <option value="null" @if (Auth::user()->gender == 'null') selected @endif>
+                                                Unknown
                                             </option>
                                         </select>
                                         @error('gender')
@@ -141,7 +153,7 @@
                                         @else
                                             <i class="far fa-clock fa-lg me-3 text-danger"></i>
                                             <input class="form-control w-90 d-inline text-muted" type="text"
-                                                value="{{ auth::user()->created_at->format('j - M - Y, (h:i:s A) ') }} updated!!!"
+                                                value="{{ auth::user()->updated_at->format('j - M - Y, (h:i:s A) ') }} updated!!!"
                                                 @disabled($switch)>
                                         @endif
 

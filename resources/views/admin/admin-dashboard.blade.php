@@ -1,6 +1,6 @@
 @extends('admin.admin-master')
 
-@section('title', 'dashboard')
+@section('title', 'Main-Dashboard')
 
 
 @section('content')

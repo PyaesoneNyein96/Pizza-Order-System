@@ -27,8 +27,12 @@ class basicAuth
                 url()->current() == route('auth@login') ||
                 url()->current() == route('auth@register'))
                 {
-
-                    return back();
+                    if(Auth::user()->role == 'admin' || Auth::user()->role == 'super'){
+                        return redirect()->route('admin@dashboard');
+                    }else{
+                        return redirect()->route('user@home');
+                    }
+                    // return back();
             }
 
        }

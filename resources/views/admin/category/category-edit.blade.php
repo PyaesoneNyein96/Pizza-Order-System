@@ -1,7 +1,7 @@
 @extends('admin.admin-master')
 
 
-@section('title', 'dashboard-category')
+@section('title', 'Category-Edit')
 
 @section('content')
 
