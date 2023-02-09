@@ -33,6 +33,9 @@
     <link href="{{ asset('admin/vendor/slick/slick.css" rel="stylesheet') }}" media="all">
     <link href="{{ asset('admin/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.') }}css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,24 +63,26 @@
                         <li>
                             <a href="{{ route('admin@dashboard') }}"
                                 class="text-decoration-none @if (url()->current() == route('admin@dashboard')) text-danger @endif">
-                                <i class="fa fa-laptop" aria-hidden="true"></i> Dashboard</a>
+                                <i class="fa-solid fa-laptop-file"></i> Dashboard</a>
                         </li>
-                        {{-- <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Home Page
+                        <li>
+                            <a href="{{ route('admin@adminList') }}"
+                                class="text-decoration-none @if (url()->current() == route('admin@adminList')) text-danger @endif">
+                                <i class="fa-solid fa-users-between-lines"></i>
+                                Admin list
                             </a>
-                        </li> --}}
+                        </li>
                         <li>
                             <a href="{{ route('admin@categoryList') }}"
                                 class="text-decoration-none
                             @if (url()->current() == route('admin@categoryList')) text-danger @endif">
-                                <i class="fa fa-list" aria-hidden="true"></i> Category</a>
+                                <i class="fa-solid fa-list-check"></i> Category</a>
                         </li>
                         <li>
-
                             <a href="{{ route('admin@productList') }}"
                                 class="text-decoration-none @if (url()->current() == route('admin@productList')) text-danger @endif">
-                                <i class="fa fa-list" aria-hidden="true"></i>
+                                {{-- <i class="fa fa-list" aria-hidden="true"></i> --}}
+                                <i class="fa-solid fa-pizza-slice"></i>
                                 Product
                             </a>
                         </li>

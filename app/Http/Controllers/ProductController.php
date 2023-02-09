@@ -15,12 +15,15 @@ class ProductController extends Controller
 
     // MAIN SHOW
     public function list(){
-        $data = Product::when(request('searchValue'),function($i){
+
+        $data = Product::select('products.*', 'categories.name as category_name')->when(request('searchValue'),function($i){
             $key = request('searchValue');
+            $i->where('products.name','like','%'.$key.'%')->orWhere('description','like', "%$key%"); })
 
-            $i->where('name','like','%'.$key.'%')->orWhere('description','like', '%'.$key.'%');
-        })->orderBy('created_at','desc')->paginate(3);
-
+            ->leftJoin('categories','products.category_id','categories.id')
+            ->orderBy('products.created_at','desc')
+            ->paginate(3);
+    // dd($data->toArray());
 
         return view('admin.product.product_list',compact('data'));
     }
@@ -51,7 +54,9 @@ class ProductController extends Controller
 
     // DETAIL
     public function detail($id){
-        $data = Product::where('id', $id)->first();
+        $data = Product::select('products.*','categories.name as category_name')
+        ->leftJoin('categories','products.category_id','categories.id')
+        ->where('products.id', $id)->first();
         return view('admin.product.product-detail',compact('data'));
     }
 

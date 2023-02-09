@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,5 +42,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '123',
             'address' => 'yangon'
         ]);
+
+
+
     }
 }

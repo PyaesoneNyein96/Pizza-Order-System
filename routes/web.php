@@ -56,10 +56,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('detail/{id}',[ProductController::class,'detail'])->name('admin@detailProduct');
             Route::get('edit/{id}',[ProductController::class,'editPage'])->name('admin@productEdit');
 
-            Route::post('preview',[ProductController::class,'preview'])->name('product@preview');
-
             Route::post('update',[ProductController::class,'update'])->name('admin@productUpdate');
             Route::get('delete/{id}',[ProductController::class,'deleteProduct'])->name('admin@deleteProduct');
+        });
+
+        // ADMIN LIST
+        Route::prefix('Manage')->group(function () {
+            Route::get('list', [AdminController::class,'list'])->name('admin@adminList');
+            Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin@adminDelete');
         });
     });
 

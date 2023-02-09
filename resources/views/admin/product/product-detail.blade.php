@@ -7,8 +7,19 @@
 
     <div class="main-content">
         <div class="section__content section__content--p30">
+
             <div class="container-fluid">
 
+                <div class="row">
+                    @if (session('success'))
+                        <div class="col-md-5 float-end alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="text-success small">{{ session('success') }} <i class="fa fa-check"
+                                    aria-hidden="true"></i>
+                                </sp>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
 
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
@@ -17,8 +28,8 @@
 
                                 <div class="row mb-2">
                                     <div class=" col-md-6">
-                                        <img src="{{ asset('storage/product/' . $data->image) }}" title="{{ $data->name }}"
-                                            class="card-img w-100 img-thumbnail my-2 shadow">
+                                        <img src="{{ asset('storage/product/' . $data->image) }}"
+                                            title="{{ $data->name }}" class="card-img w-100 img-thumbnail my-2 shadow">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card">
@@ -31,7 +42,8 @@
 
                                                 <div class="h6 card-text mb-2">
                                                     <span class="h6">Category: </span>
-                                                    {{ $data->Category->name }}
+                                                    {{-- {{ $data->Category->name }} --}}
+                                                    {{ $data->category_name }}
                                                 </div>
                                                 <div class="h6 cardard-text mb-2">
                                                     <span class="h6">Price: </span>

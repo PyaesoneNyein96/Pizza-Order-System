@@ -10,6 +10,7 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid ">
 
+
                 <form action="{{ route('admin@productUpdate', $item->id) }}" enctype="multipart/form-data"
                     class="card p-3 position-relative" method="post">
                     @csrf
@@ -23,7 +24,7 @@
                             </div>
                             <div class="col-md-6
                                     text-end ">
-                                <h5 class="text-muted m-3 text-start">Preview image</h5>
+                                <h5 class="text-muted m-3 text-center">Preview image</h5>
                                 <div class="card-img">
                                     <img id="output" style="width:300px; height:200px; object-fit: cover;"
                                         class="img-tumbnail shadow">
@@ -134,8 +135,15 @@
                             <div>
                                 <button id="payment-button" type="submit"
                                     class="btn btn-lg btn-info btn-block mt-4 text-light rounded">
-                                    <span id="payment-button-amount">Create
+                                    <span id="payment-button-amount">Update
                                         <i class="fa fa-upload" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                <button id="payment-button" type="button" onclick="history.back()"
+                                    class="btn btn-lg btn-info btn-block mt-4 text-light rounded">
+                                    <span id="payment-button-amount">
+                                        Back
+                                        <i class="fa fa-backward" aria-hidden="true"></i>
                                     </span>
                                 </button>
                             </div>
@@ -154,6 +162,5 @@
         </form>
 
     </div>
-    </div>
-    </div>
+
 @endsection

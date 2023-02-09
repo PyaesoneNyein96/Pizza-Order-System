@@ -19,23 +19,19 @@ class AdminController extends Controller
         $switch = 'false';
         return view('admin.admin-Profile',compact('switch'));
     }
-
     public function unlockProfile(){
         $switch ='true';
         return view('admin.admin-Profile',compact('switch'));
     }
 
-
-
-
+    // PROFILE EDIT
     public function profileEdit($id){
         $this->profileUPdateValidation(request());
         $data = $this->getData(request());
-
         // for Image
         if(request()->hasFile('image')){
            $dbImg = Auth::user()->image;
-        //    dd($dbImg);
+
             if($dbImg != null){
                 Storage::delete('public/'.$dbImg);
             }
@@ -44,12 +40,52 @@ class AdminController extends Controller
             $data['image'] = $uniqueName;
         }
 
-
-
         User::find($id)->update($data);
 
         return redirect()->route('admin@profile');
     }
+
+
+    // xxxxxxxxxxxxxxxx
+    // AMIN MANAGEMENT
+    // xxxxxxxxxxxxxxxx
+
+
+    public function list(){
+        $users = User::when(request('searchValue'), function ($query){
+            $key = request('searchValue');
+            $query->orWhere('name','like',"%$key%")
+            ->orWhere('email','like',"%$key%")
+            ->orWhere('phone','like', "%$key%")
+            ->orWhere('gender','like', "%$key%")
+            ->orWhere('address','like', "%$key%");
+        })->orderBy('created_at', 'desc')->paginate(2);
+       $users->appends(request()->all());
+        // $users= User::where('role','admin' )->paginate(2);
+        return view('admin.manageAdmin.admin_list',compact('users'));
+    }
+
+    public function delete($id){
+        $user = User::find($id);
+        User::find($id)->delete();
+
+        return redirect()->route('admin@adminList')->with('delMsg',"$user->name - has been successfully deleted");
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
