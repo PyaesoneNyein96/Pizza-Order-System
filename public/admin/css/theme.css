@@ -48,6 +48,13 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 
+.bg-d-light {
+    background-color: rgba(169, 196, 205, 0.389);
+}
+.orange {
+    color: blueviolet;
+}
+
 .brand-font {
     font-family: "Rubik Gemstones", cursive;
 }
@@ -66,7 +73,6 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 }
 .product-img:hover {
     transform: scale(1.4);
-
 }
 
 ul {
@@ -3578,7 +3584,7 @@ section {
 }
 
 .au-task__item--primary .au-task__item-inner {
-    border-left: 3px solid #4272d7;
+    border-left: 3px solid #2f5cbb;
 }
 
 .au-task__item--success .au-task__item-inner {
@@ -4499,7 +4505,7 @@ section {
     border-bottom: 1px solid #f2f2f2;
     padding-top: 23px;
     padding-bottom: 33px;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-right: 10px;
 }
 
@@ -4677,7 +4683,7 @@ section {
     font-size: 14px;
     color: #808080;
     vertical-align: middle;
-    padding: 25px 40px;
+    padding: 25px 20px;
     padding-right: 10px;
     border: none;
 }

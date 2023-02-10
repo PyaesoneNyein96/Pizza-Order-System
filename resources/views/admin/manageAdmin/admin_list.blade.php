@@ -44,7 +44,7 @@
                         <div class="d-flex row justify-content-between ">
                             <div class="col-md-5 col-6 total text-start">
                                 Total Category : <span class="badge badge-pill px-2 rounded-circle h5 bg-info">
-                                    {{-- {{ $data->total() }} --}}
+                                    {{ $users->total() }}
                                 </span>
                                 <div> Search Key :
                                     <span class="text-danger">
@@ -101,7 +101,7 @@
                         </div>
 
 
-                        @if (Auth::check())
+                        @if (!$users->isEmpty())
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
@@ -112,7 +112,8 @@
                                         <th> Gender</th>
                                         <th> Phone</th>
                                         <th> Address</th>
-                                        <th> Status</th>
+                                        <th> Role</th>
+                                        <th> Register Date</th>
 
                                         {{-- <th> date</th> --}}
                                         <th> Actions</th>
@@ -121,7 +122,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
-                                        <tr class="tr-shadow">
+                                        <tr class="tr-shadow @if (Auth::user()->id == $user->id) bg-d-light @endif">
 
                                             <td>{{ $loop->index + $users->firstItem() }}</td>
 
@@ -147,6 +148,9 @@
                                                 <span>{{ $user->email }}</span>
                                             </td>
                                             <td>
+                                                @if ($user->gender == null)
+                                                    N/A
+                                                @endif
                                                 <span> {{ $user->gender }} </span>
                                             </td>
                                             <td>
@@ -156,26 +160,72 @@
                                                 <span>{{ $user->address }}</span>
                                             </td>
                                             <td>
+                                                <span
+                                                    class="bg-info p-1 rounded text-light
+                                                @if ($user->role == 'admin') bg-primary
+                                                @elseif($user->role == 'super')
+                                                 bg-danger px-2 @endif">
+                                                    {{ $user->role }}
+                                                </span>
+                                            </td>
+                                            <td>
                                                 <span> {{ $user->created_at->format('j - M -Y') }} </span> |
 
                                             </td>
 
                                             <td class="bg-light ">
                                                 <div class="table-data-feature d-flex justify-content-start">
+                                                    @if (Gate::allows('admin/super-auth', Auth::user()))
+                                                        @if ($user->role !== 'super' && $user->status == 'allows' && Auth::user()->id !== $user->id)
+                                                            <a href="{{ route('admin@suspend', $user->id) }}">
+                                                                <button class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="To Suspend">
+                                                                    <i class="fa-solid fa-check text-success"></i>
 
-                                                    <a href="{{ route('admin@detailProduct', $user->id) }}">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top"
-                                                            title="Suspend">
-                                                            <i class="fa-solid fa-circle-pause text-danger"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a href="{{ route('admin@productEdit', $user->id) }}" class="mx-2">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top"
-                                                            title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </button>
-                                                    </a>
-                                                    @if (Auth::user()->id !== $user->id)
+                                                                </button>
+                                                            </a>
+                                                        @elseif ($user->role !== 'super' && $user->status == 'suspend')
+                                                            <a href="{{ route('admin@allows', $user->id) }}">
+                                                                <button class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="To Allows">
+                                                                    <i class="fa-solid fa-circle-pause"
+                                                                        style="color:rgb(207, 135, 2);"></i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if (Gate::allows('admin/super-auth', Auth::user()))
+                                                        @if (($user->role == 'super' && Auth::user()->role == 'super') || $user->role == 'admin')
+                                                            <a href="{{ route('admin@demote', $user->id) }}"
+                                                                class="mx-2">
+                                                                <button class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="demote">
+                                                                    <i
+                                                                        class="fa-solid fa-person-arrow-down-to-line
+                                                        text-danger">
+                                                                    </i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                    @if (Gate::allows('admin/super-auth', Auth::user()))
+                                                        @if (
+                                                            (Auth::user()->role == 'admin' && $user->role !== 'admin' && $user->role !== 'super') ||
+                                                                ((Auth::user()->role == 'super' && $user->role == 'admin') || $user->role == 'user'))
+                                                            <a href="{{ route('admin@promote', $user->id) }}"
+                                                                class="mx-2">
+                                                                <button class="item" data-toggle="tooltip"
+                                                                    data-placement="top" title="promote">
+                                                                    <i
+                                                                        class="fa-solid fa-square-arrow-up-right text-success ">
+                                                                    </i>
+                                                                </button>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+
+                                                    @if ($user->role !== 'super' && Auth::user()->id !== $user->id)
                                                         <a class="mx-2"
                                                             href="{{ route('admin@adminDelete', $user->id) }}">
                                                             <button class="item" data-toggle="tooltip"
@@ -184,6 +234,7 @@
                                                             </button>
                                                         </a>
                                                     @endif
+
 
                                                 </div>
                                             </td>

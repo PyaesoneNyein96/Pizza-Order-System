@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone',15);
             $table->string('address');
             $table->string('role')->default('user');
+            $table->string('status')->default('allows');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

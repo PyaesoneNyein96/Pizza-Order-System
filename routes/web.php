@@ -64,6 +64,10 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('Manage')->group(function () {
             Route::get('list', [AdminController::class,'list'])->name('admin@adminList');
             Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin@adminDelete');
+            Route::get('demote/{id}', [AdminController::class,'demote'])->name('admin@demote');
+            Route::get('promote/{id}', [AdminController::class,'promote'])->name('admin@promote');
+            Route::get('suspend/{id}', [AdminController::class,'suspend'])->name('admin@suspend');
+            Route::get('allows/{id}', [AdminController::class,'allows'])->name('admin@allows');
         });
     });
 

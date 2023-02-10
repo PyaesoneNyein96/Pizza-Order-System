@@ -58,13 +58,70 @@ class AdminController extends Controller
             ->orWhere('email','like',"%$key%")
             ->orWhere('phone','like', "%$key%")
             ->orWhere('gender','like', "%$key%")
-            ->orWhere('address','like', "%$key%");
-        })->orderBy('created_at', 'desc')->paginate(2);
+            ->orWhere('address','like', "%$key%")
+            ->orWhere('role','like', "%$key%");
+        })->where('role','admin')->orWhere('role','super')
+        ->orderBy('created_at', 'desc')->paginate(10);
+
        $users->appends(request()->all());
-        // $users= User::where('role','admin' )->paginate(2);
         return view('admin.manageAdmin.admin_list',compact('users'));
     }
 
+
+    // DEMOTE (-)
+    public function demote($id){
+        $user = User::find($id);
+
+        $toUser = ['role' => 'user'];
+        $toAdmin = ['role' => 'admin'];
+
+        if($user->role == 'admin'){
+            $user->update($toUser);
+        }else if($user->role == 'super'){
+            $user->update($toAdmin);
+        }
+
+        return back()->with('updateMsg', 'Demote process successfully');
+    }
+
+    // PROMOTE (+)
+    public function promote($id){
+        $user = User::find($id);
+        // dd($user->toArray());
+
+        $toSuper = ['role' => 'super'];
+        $toAdmin = ['role' => 'admin'];
+
+        if($user->role == 'admin'){
+            $user->update($toSuper);
+        }else if($user->role == 'admin'){
+            $user->update($toAdmin);
+        }else if($user->role == 'user'){
+            $user->update($toAdmin);
+        }
+
+        return back()->with('updateMsg', 'Promote process successfully');
+
+    }
+
+    //SUSPEND (။)
+    public function suspend($id){
+        $user = User::find($id);
+        if($user->status == 'allows'){
+            $user->update(['status'=> 'suspend']);
+        }
+        return back()->with('delMsg', 'This user has been Suspend');
+    }
+    //Allows (>)
+    public function allows($id){
+        $user = User::find($id);
+        if($user->status == 'suspend'){
+            $user->update(['status'=> 'allows']);
+        }
+        return back()->with('updateMsg', 'This user has been unsuspend');
+    }
+
+    // DELETE ADMIN
     public function delete($id){
         $user = User::find($id);
         User::find($id)->delete();

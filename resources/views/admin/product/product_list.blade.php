@@ -148,7 +148,7 @@
 
                                             </td> --}}
 
-                                            <td class="bg-light ">
+                                            <td class="bg-light">
                                                 <div class="table-data-feature d-flex justify-content-center">
 
                                                     <a href="{{ route('admin@detailProduct', $item->id) }}">

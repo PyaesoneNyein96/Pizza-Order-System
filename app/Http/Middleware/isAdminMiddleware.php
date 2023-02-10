@@ -24,9 +24,12 @@ class isAdminMiddleware
         //     return back();
         // }
 
+
+
         if(Auth::user()->role == 'user'){
+
             return redirect()->route('user@home');
-            // return abort(404);
+
         }
         return $next($request);
     }

@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="form-group m-b-10">
 
-                                        <i class="fas fa-venus-double fa-lg me-3"></i>
+                                        <i class="fas fa-venus-double  me-3"></i>
                                         <select name="gender" class="form-select w-90 d-inline"
                                             @disabled($switch == 'false')>
                                             <option value="male" @if (Auth::user()->gender == 'male') selected @endif>
@@ -136,6 +136,16 @@
                                         <i class="fas fa-tag fa-lg me-3"></i>
                                         <input class="form-control w-90 d-inline" type="text" name="role"
                                             value="{{ auth::user()->role }}" @disabled($switch)>
+                                        @error('role')
+                                            <small class="text-danger mx-5">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group m-b-10">
+                                        <i class="fa-solid fa-check fa-lg me-3"></i>
+                                        <input class="form-control w-90 d-inline" type="text" name="role"
+                                            value="{{ auth::user()->status }}" @disabled($switch)>
                                         @error('role')
                                             <small class="text-danger mx-5">
                                                 {{ $message }}
