@@ -166,7 +166,6 @@
                                                     alt="">
                                             @endif
                                             <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="">
-
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn text-decoration-none"

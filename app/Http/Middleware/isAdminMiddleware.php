@@ -27,7 +27,6 @@ class isAdminMiddleware
 
 
         if(Auth::user()->role == 'user'){
-
             return redirect()->route('user@home');
 
         }

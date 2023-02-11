@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\UserController;
 
 
 
@@ -12,9 +13,13 @@ use App\Http\Controllers\CategoryController;
 // ======ADMIN +++
 
 
-Route::redirect('/', 'auth/login');
+Route::redirect('/', 'auth/home');
+
+
+
 // ======== LOGIN - REGISTER +++++++
 Route::prefix('auth')->middleware('basicAuth')->group(function () {
+    Route::get('/home',[UserController::class,'home'])->name('home');
 
     Route::get('login',[ AuthController::class,'loginPage'])->name('auth@login');
     Route::get('register',[AuthController::class,'registerPage'])->name('auth@register');
@@ -25,8 +30,6 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-
-
 
 // =====ADMIN=====
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
@@ -72,17 +75,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-// =====USER=====
-    Route::prefix('user')->middleware('isUser')->group(function () {
-        Route::get('/home', function(){
-            return view('all-User.userHome');
-        })->name('user@home');
-
-    });
-
-
-
-
-
+        // =====USER=====
+        Route::prefix('user')->middleware('isUser')->group(function () {
+            Route::get('/home',[UserController::class,'home'])->name('user@home');
+        });
 
 });

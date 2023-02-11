@@ -22,7 +22,7 @@ class ProductController extends Controller
 
             ->leftJoin('categories','products.category_id','categories.id')
             ->orderBy('products.created_at','desc')
-            ->paginate(3);
+            ->paginate(10);
     // dd($data->toArray());
 
         return view('admin.product.product_list',compact('data'));

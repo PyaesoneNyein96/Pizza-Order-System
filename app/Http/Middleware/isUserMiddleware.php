@@ -18,11 +18,11 @@ class isUserMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(Auth::user()->role == 'admin'){
+        if(Auth::user()->role == 'admin' ){
             if(url()->current() == route('user@home')){
                 return redirect()->route('admin@dashboard');
             }
-           return back();
+        //    return back();
         }
         return $next($request);
     }
