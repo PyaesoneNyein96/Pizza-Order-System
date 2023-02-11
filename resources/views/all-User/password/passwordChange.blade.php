@@ -1,7 +1,100 @@
 @extends('layout.master')
 
 @section('title', 'Password Change')
+
+
+@if (Auth::user()->role == 'user')
+    <div class="container-fluid mb-30" style="margin-buttom:100px; background-color:#3d464d">
+        <div class="row px-xl-5 align-items-center">
+            <div class="col-lg-3 d-none d-lg-block">
+
+                <div class="col-lg-12  py-1">
+                    <a href="#" class="text-decoration-none">
+                        <a href="#" class="text-decoration-none d-flex align-items-center ">
+                            <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 50px";
+                                alt="Cool Admin" />
+                            <span class="h2 brand-font text-warning mx-2 mt-2"> Pizza Galaxy</span>
+                        </a>
+
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-dark-custom navbar-dark py-3 py-lg-0 px-0">
+
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            @auth
+                                <a href="{{ route('user@home') }}" class="nav-item nav-link active">Home</a>
+                            @endauth
+                            @guest
+                                <a href="" class="nav-item nav-link active">Home</a>
+                            @endguest
+                            <a href="cart.html" class="nav-item nav-link">My Cart</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+
+
+                            @auth
+                                <div class="dropdown d-inline ms-3">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" href="#"
+                                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="dropdown"
+                                        data-bs-display="static">
+                                        <i class="fa fa-user text-info"></i>
+                                        {{ Auth::user()->name }}
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-menu-end ">
+                                        <li class="my-2">
+                                            <a href="" class="dropdown-item ">
+                                                <i class="fa-solid fa-user-tie me-1"> </i> Account Info</a>
+                                        </li>
+
+                                        <li class="my-2">
+                                            <span class="dropdown-item">
+                                                <form action="{{ route('logout') }}" class="d-inline " method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn mx-0 px-0">
+                                                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                                    </button>
+                                                </form>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endauth
+                            @guest
+                                <span>
+                                    <a href="{{ route('auth@login') }}">
+                                        <button class="btn btn-outline-info  rounded btn-sm">
+                                            Login or Register
+                                        </button>
+                                    </a>
+                                </span>
+                            @endguest
+
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="" style="height:50px;  background: #e5e5e5;"></div>
+@endif
+
+
+
 @section('content')
+
     <div class="login-logo">
         <a href="#" class="text-decoration-none">
             <img src="{{ asset('admin/images/icon/pizza.png') }}" class="w-25 shadow-sm" alt="CoolAdmin">

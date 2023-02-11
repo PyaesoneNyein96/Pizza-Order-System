@@ -39,6 +39,19 @@
 
 /* CUSTOMIZE START  */
 
+.w-90 {
+    width: 90% !important;
+}
+.img-wrap {
+    width: fit-content;
+}
+
+.img-wrap img {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
 .user-profile-badge img {
     width: 60px;
     display: flex;
@@ -6570,7 +6583,7 @@ button.bg-light:focus {
     background-color: #e6e6e6 !important;
 }
 
-.bg-dark {
+.bg-dark-custom {
     background-color: #3d464d !important;
 }
 

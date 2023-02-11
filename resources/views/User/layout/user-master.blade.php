@@ -29,27 +29,16 @@
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
 
     {{-- added bootstrap link psn  --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body>
-    <!-- Topbar Start -->
-    {{-- <div class="container-fluid">
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-            <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">CODE LAB</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
-                </a>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Topbar End -->
+<body style="position:relative">
+
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid bg-dark mb-30">
+    <div class="container-fluid bg-dark-custom mb-30" style="position: sticky; top:0; z-index:100">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 {{-- <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
@@ -98,59 +87,88 @@
 
 
             <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                    <a href="" class="text-decoration-none d-block d-lg-none">
+                <nav class="navbar navbar-expand-lg bg-dark-custom navbar-dark py-3 py-lg-0 px-0">
+                    {{-- <a href="" class="text-decoration-none d-block d-lg-none">
                         <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
                         <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                    </a>
+                    </a> --}}
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Home</a>
+                            @auth
+                                <a href="{{ route('user@home') }}" class="nav-item nav-link active">Home</a>
+                            @endauth
+                            @guest
+                                <a href="" class="nav-item nav-link active">Home</a>
+                            @endguest
+
                             <a href="cart.html" class="nav-item nav-link">My Cart</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
 
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             @auth
-                                <a href="" class="btn px-0">
-                                    <i class="fas fa-heart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                                <a href="" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
+                                @if (url()->current() == route('user@home'))
+                                    <a href="" class="btn px-0">
+                                        <i class="fas fa-heart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle"
+                                            style="padding-bottom: 2px;">0</span>
+                                    </a>
+                                    <a href="" class="btn px-0 ml-3">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle"
+                                            style="padding-bottom: 2px;">0</span>
+                                    </a>
+                                @endif
                             @endauth
-                            <a href="" class="mx-2">
-                                @auth
 
-                                    <a class="text-light btn px-0 ml-3 ">
+
+
+                            @auth
+
+
+                                <div class="dropdown d-inline ms-3">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" href="#"
+                                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="dropdown"
+                                        data-bs-display="static">
                                         <i class="fa fa-user text-info"></i>
-                                        {{ Auth::user()->name }} |
-                                    </a>
-                                    <a href="{{ route('logout') }}">
+                                        {{ Auth::user()->name }}
+                                    </button>
 
-                                        <form action="{{ route('logout') }}" class="d-inline mx-1" method="POST">
-                                            @csrf
-                                            <button class="btn btn-outline-info rounded btn-sm">
-                                                Logout <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                            </button>
-                                        </form>
-                                    </a>
-                                @endauth
-                                @guest
+                                    <ul class="dropdown-menu dropdown-menu-end ">
+                                        <li class="my-2">
+                                            <a href="{{ route('user@profile') }}" class="dropdown-item ">
+                                                <i class="fa-solid fa-user-tie me-1"> </i> Account Info</a>
+                                        </li>
+                                        <li class="my-2">
+                                            <a href="{{ route('auth@changePage') }}" class="dropdown-item ">
+                                                <i class="fa-solid fa-key"></i> Change Password</a>
+                                        </li>
+                                        <li class="my-2">
+                                            <span class="dropdown-item">
+                                                <form action="{{ route('logout') }}" class="d-inline " method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn mx-0 px-0">
+                                                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                                    </button>
+                                                </form>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endauth
+                            @guest
+                                <span>
                                     <a href="{{ route('auth@login') }}">
-                                        <button class="btn btn-outline-primary rounded btn-sm">
+                                        <button class="btn btn-outline-info  rounded btn-sm">
                                             Login or Register
                                         </button>
                                     </a>
-                                @endguest
-                            </a>
+                                </span>
+                            @endguest
+
 
                         </div>
                     </div>
@@ -180,7 +198,7 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+    <div class="container-fluid bg-dark-custom text-secondary mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
@@ -286,9 +304,9 @@
     <script src="{{ asset('user/js/main.js') }}"></script>
 
     {{-- bootstrap link psn  --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script> --}}
+    </script>
 </body>
 
 </html>

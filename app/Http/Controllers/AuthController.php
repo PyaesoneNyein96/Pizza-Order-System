@@ -14,7 +14,6 @@ class AuthController extends Controller
         // User Dashboard Direction
 
 
-
     public function loginPage(){
         return view('login');
     }
@@ -23,6 +22,9 @@ class AuthController extends Controller
     public function registerPage(){
             return view('register');
     }
+
+
+
 
     // Pass Change Page
     public function passwordChangePage(){

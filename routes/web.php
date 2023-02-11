@@ -76,8 +76,14 @@ Route::middleware(['auth'])->group(function () {
 
 
         // =====USER=====
-        Route::prefix('user')->middleware('isUser')->group(function () {
-            Route::get('/home',[UserController::class,'home'])->name('user@home');
-        });
+    Route::prefix('user')->middleware('isUser')->group(function () {
+        Route::get('/home',[UserController::class,'home'])->name('user@home');
+
+        // USER PROFILE
+        Route::get('/profile',[UserController::class,'profile'])->name('user@profile');
+        Route::get('/unlockProfile',[UserController::class,'unlockProfile'])->name('user@unlockProfile');
+        Route::post('profileEdit/{id}',[UserController::class,'profileEdit'])->name('user@profileEdit');
+
+    });
 
 });
