@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserController;
 
 
@@ -19,6 +21,7 @@ Route::redirect('/', 'auth/home');
 
 // ======== LOGIN - REGISTER +++++++
 Route::prefix('auth')->middleware('basicAuth')->group(function () {
+    // HOME FOR ALL USER
     Route::get('/home',[UserController::class,'home'])->name('home');
 
     Route::get('login',[ AuthController::class,'loginPage'])->name('auth@login');
@@ -33,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
 
 // =====ADMIN=====
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
-
+        // ADMIN DASHBOARD
         Route::get('/dashboard',[AdminController::class,'adminDashboard'])->name('admin@dashboard');
 
         // ADMIN PROFILE
@@ -63,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}',[ProductController::class,'deleteProduct'])->name('admin@deleteProduct');
         });
 
-        // ADMIN LIST
+        // ADMIN LIST MANAGEMENT
         Route::prefix('Manage')->group(function () {
             Route::get('list', [AdminController::class,'list'])->name('admin@adminList');
             Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin@adminDelete');
@@ -72,17 +75,22 @@ Route::middleware(['auth'])->group(function () {
             Route::get('suspend/{id}', [AdminController::class,'suspend'])->name('admin@suspend');
             Route::get('allows/{id}', [AdminController::class,'allows'])->name('admin@allows');
         });
-    });
+    }); // Admin middleware End here!--
 
 
         // =====USER=====
     Route::prefix('user')->middleware('isUser')->group(function () {
+        // USER HOME
         Route::get('/home',[UserController::class,'home'])->name('user@home');
 
         // USER PROFILE
         Route::get('/profile',[UserController::class,'profile'])->name('user@profile');
         Route::get('/unlockProfile',[UserController::class,'unlockProfile'])->name('user@unlockProfile');
         Route::post('profileEdit/{id}',[UserController::class,'profileEdit'])->name('user@profileEdit');
+
+        Route::prefix('ajax')->group(function () {
+           Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
+        });
 
     });
 

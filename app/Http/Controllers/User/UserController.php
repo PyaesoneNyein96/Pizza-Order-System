@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('User.main.user-profile',compact('switch'));
     }
 
-    // PROFILE EDIT
+    // PROFILE EDIT AND UPDATE
     public function profileEdit($id){
         $this->profileUPdateValidation(request());
         $data = $this->getData(request());

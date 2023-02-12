@@ -18,11 +18,11 @@
                                 <div class="col-md-3">
                                     <div class="img-wrap shadow p-1 m-3">
                                         @if (Auth::user()->image == null && Auth::user()->gender == 'male')
-                                            <img src="{{ asset('image/avators/images.jpg') }}" />
+                                            <img src="{{ asset('image/avators/images.jpg') }}" id='profile' />
                                         @elseif (Auth::user()->image == null && Auth::user()->gender == 'female')
-                                            <img src="{{ asset('image/avators/female.jpg') }}" />
+                                            <img src="{{ asset('image/avators/female.jpg') }}" id='profile' />
                                         @elseif(Auth::user()->image == null)
-                                            <img src="{{ asset('image/avators/genderless.jpg') }}" alt="">
+                                            <img src="{{ asset('image/avators/genderless.jpg') }}" id='profile'>
                                         @endif
                                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
                                             id='profile'>

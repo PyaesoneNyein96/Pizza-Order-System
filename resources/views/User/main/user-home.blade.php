@@ -63,17 +63,23 @@
                                 <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
                             </div>
                             <div class="ml-2">
-                                <div class="btn-group">
+                                {{-- <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle"
                                         data-toggle="dropdown">Sorting</button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#">Latest</a>
                                         <a class="dropdown-item" href="#">Ascending</a>
                                         <a class="dropdown-item" href="#">By Naming Order</a>
-                                        {{-- <a class="dropdown-item" href="#">Best Rating</a> --}}
                                     </div>
-                                </div>
-                                <div class="btn-group ml-2">
+                                </div> --}}
+                                <select name="sorting" id="sortingOption" class="form-control form-control-sm shadow-none">
+                                    <option value="" selected hidden disabled>- Order By</option>
+                                    <option value="asc">Ascending</option>
+                                    <option value="des">Descending</option>
+                                </select>
+
+
+                                {{-- <div class="btn-group ml-2">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle"
                                         data-toggle="dropdown">Showing</button>
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -81,49 +87,50 @@
                                         <a class="dropdown-item" href="#">20</a>
                                         <a class="dropdown-item" href="#">30</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
 
-                    @foreach ($products as $item)
-                        {{-- <a href="detail.html"> --}}
-                        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                            <div class="product-item bg-light mb-4">
-                                <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/product/' . $item->image) }}"
-                                        alt="" style="height:250px; object-fit:cover">
-                                    <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" href="">
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </a>
-                                        <a class="btn btn-outline-dark btn-square" href="">
-                                            <i class="far fa-heart"></i>
-                                        </a>
-                                        <a class="btn btn-outline-dark btn-square" href="">
-                                            <i class="fa-solid fa-circle-info"></i>
-                                        </a>
+                    <div id="dataList" class="row">
+                        @foreach ($products as $item)
+                            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                <div class="product-item bg-light mb-4" id="ajaxData">
+                                    <div class="product-img position-relative overflow-hidden">
+                                        <img class="img-fluid w-100" src="{{ asset('storage/product/' . $item->image) }}"
+                                            alt="" style="height:250px; object-fit:cover">
+                                        <div class="product-action">
+                                            <a class="btn btn-outline-dark btn-square" href="">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a class="btn btn-outline-dark btn-square" href="">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                            <a class="btn btn-outline-dark btn-square" href="">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </a>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">{{ $item->name }}</a>
-                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>{{ $item->price }} Kyats</h5>
-                                        <h6 class="text-muted ml-2"><del>25000</del></h6>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-center mb-1">
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
+                                    <div class="text-center py-4">
+                                        <a class="h6 text-decoration-none text-truncate"
+                                            href="">{{ $item->name }}</a>
+                                        <div class="d-flex align-items-center justify-content-center mt-2">
+                                            <h5>{{ $item->price }} Kyats</h5>
+                                            <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center mb-1">
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- </a> --}}
-                    @endforeach
+                        @endforeach
+                    </div>
 
                 </div>
             </div>
@@ -132,5 +139,132 @@
     </div>
     <!-- Shop End -->
 
+@endsection
 
+@section('script')
+    <script>
+        $(document).ready(() => {
+
+            // $.ajax({
+            //     type: 'get',
+            //     url: 'http://localhost:8000/user/ajax/pizza/list',
+            //     dataType: 'json',
+            //     success: (res) => {
+            //         console.log(res);
+            //     }
+            // })
+
+            $('#sortingOption').change(() => {
+                $eventOption = $('#sortingOption').val();
+                if ($eventOption == 'asc') {
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://localhost:8000/user/ajax/pizza/list',
+                        data: {
+                            'status': 'asc'
+                        },
+                        dataType: 'json',
+                        success: (res) => {
+                            $list = '';
+                            for ($i = 0; $i < res.length; $i++) {
+                                $list += `
+                                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                        <div class="product-item bg-light mb-4" id="ajaxData">
+                                            <div class="product-img position-relative overflow-hidden">
+                                                <img class="img-fluid w-100" src="{{ asset('storage/product/${res[$i].image}') }}"
+                                                    alt="" style="height:250px; object-fit:cover">
+                                                <div class="product-action">
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="far fa-heart"></i>
+                                                    </a>
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="text-center py-4">
+                                                <a class="h6 text-decoration-none text-truncate" href="">${res[$i].name}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>${res[$i].price}Kyats</h5>
+                                                    <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                               `;
+                                $('#dataList').html($list);
+                            }
+                        }
+                    })
+
+                } else if ($eventOption == 'des') {
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://localhost:8000/user/ajax/pizza/list',
+                        data: {
+                            'status': 'des'
+                        },
+                        dataType: 'json',
+                        success: (res) => {
+                            $list = '';
+                            for ($i = 0; $i < res.length; $i++) {
+                                $list += `
+                                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                        <div class="product-item bg-light mb-4" id="ajaxData">
+                                            <div class="product-img position-relative overflow-hidden">
+                                                <img class="img-fluid w-100" src="{{ asset('storage/product/${res[$i].image}') }}"
+                                                    alt="" style="height:250px; object-fit:cover">
+                                                <div class="product-action">
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="far fa-heart"></i>
+                                                    </a>
+                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="text-center py-4">
+                                                <a class="h6 text-decoration-none text-truncate" href="">${res[$i].name}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>${res[$i].price}Kyats</h5>
+                                                    <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                    <small class="fa fa-star text-primary mr-1"></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                               `;
+                                $('#dataList').html($list);
+                            }
+                        }
+                    })
+                }
+
+            })
+
+
+
+        })
+    </script>
 @endsection
