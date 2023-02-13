@@ -88,9 +88,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/unlockProfile',[UserController::class,'unlockProfile'])->name('user@unlockProfile');
         Route::post('profileEdit/{id}',[UserController::class,'profileEdit'])->name('user@profileEdit');
 
+        // Assending & Descending
         Route::prefix('ajax')->group(function () {
            Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
         });
+
+        // User Category Filter
+        Route::get('user/filter/{id}',[UserController::class,'filter'])->name('user@filter');
 
     });
 

@@ -39,7 +39,6 @@ class AdminController extends Controller
             request()->file('image')->storeAs('public',$uniqueName);
             $data['image'] = $uniqueName;
         }
-
         User::find($id)->update($data);
 
         return redirect()->route('admin@profile');

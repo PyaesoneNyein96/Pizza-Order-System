@@ -17,10 +17,11 @@ class UserController extends Controller
     public function home(){
         $products = Product::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
-        return view('User.main.user-home',compact('products','categories'));
+        $status='all';
+        return view('User.main.user-home',compact('products','categories','status'));
 
     }
-
+    // User Profile lock and unlock
     public function profile(){
         $switch = 'false';
         return view('User.main.user-profile',compact('switch'));
@@ -51,6 +52,15 @@ class UserController extends Controller
         return redirect()->route('user@profile');
     }
 
+    // user Filter
+
+    public function filter($id){
+       $status = $id;
+    //    dd($status);
+       $products = Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
+       $categories = Category::get();
+       return view('User.main.user-home',compact('products','categories','status'));
+    }
 
 
 

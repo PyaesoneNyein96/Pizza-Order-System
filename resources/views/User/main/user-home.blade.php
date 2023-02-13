@@ -14,7 +14,7 @@
 
             <div class="col-lg-3 col-md-4" style="position:relative">
                 <!-- Price Start -->
-                <div class="wrap" style="position:sticky; top:100px ;">
+                <div class="wrap" style="position:sticky; top:90px ;">
                     <h5 class="section-title text-uppercase mb-3 ">
                         <span class=" pr-3"> Filter by Categories</span>
                     </h5>
@@ -24,21 +24,47 @@
                                 class="custom-control custom-checkbox d-flex align-items-center
                                 rounded justify-content-between mb-3 bg-dark-custom text-light pt-2 px-3">
                                 {{-- <input type="checkbox" class="custom-control-input" checked id="price-all"> --}}
-                                <label class="" for="price-all">All Categories</label>
-                                <span
-                                    class="badge border font-weight-normal mb-2 text-light">{{ count($categories) }}</span>
+                                <label class="" for="price-all">All
+                                    @if ($status == 'all')
+                                        Products
+                                    @else
+                                        Categories
+                                    @endif
+                                </label>
+
+                                <span class="badge border font-weight-normal mb-2 text-light">
+                                    {{ $status ? count($products) : count($categories) }}
+                                </span>
+
                             </div>
 
                             @foreach ($categories as $category)
-                                <div
-                                    class="custom-control custom-checkbox  py-1
-                                d-flex align-items-center justify-content-between mb-3">
-                                    <input type="checkbox" class="custom-control-input" id="{{ $category->id }}">
-                                    <label class="custom-control-label"
-                                        for="{{ $category->id }}">{{ $category->name }}</label>
-                                    {{-- <span class="badge border font-weight-normal text-dark">{{ $category }}</span> --}}
+                                <div class="custom-control custom-checkbox  py-1 text-dark mb-3">
+                                    <a href="{{ route('user@filter', $category->id) }}"
+                                        class="text-decoration-none w-100 d-block"
+                                        onclick="document.getElementById({{ $category->id }}).checked=true"
+                                        class="p-1 text-decoration-none text-dark">
+                                        <input type="checkbox" id="{{ $category->id }}" class="custom-control-input"
+                                            @if ($status == $category->id) checked @endif>
+                                        <label class="custom-control-label w-100">
+                                            {{ $category->name }}
+                                        </label>
+
+                                    </a>
                                 </div>
                             @endforeach
+                            <div class="custom-control custom-checkbox  py-1 text-dark mb-3">
+                                <a href="{{ route('user@home') }}" class="text-decoration-none w-100 d-block"
+                                    onclick="document.getElementById('all').checked=true"
+                                    class="p-1 text-decoration-none text-dark">
+                                    <input type="checkbox" id="all" class="custom-control-input"
+                                        @if ($status == 'all') checked @endif>
+                                    <label class="custom-control-label w-100">
+                                        All
+                                    </label>
+
+                                </a>
+                            </div>
 
                         </form>
                     </div>
@@ -93,6 +119,13 @@
                     </div>
 
                     <div id="dataList" class="row">
+                        @if ($products->isEmpty())
+                            <div class="bg-light shadow p-3 border   rounded text-center mt-5">
+                                <span class="text-secondary h3">
+                                    There is no Pizza <i class="fa-solid fa-pizza-slice text-warning"></i> !!
+                                </span>
+                            </div>
+                        @endif
                         @foreach ($products as $item)
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                 <div class="product-item bg-light mb-4" id="ajaxData">
