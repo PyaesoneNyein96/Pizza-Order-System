@@ -21,6 +21,16 @@ class UserController extends Controller
         return view('User.main.user-home',compact('products','categories','status'));
 
     }
+
+    //Detail
+    public function detail($id){
+        $item = Product::find($id);
+        $uMayLike = Product::where('category_id',$item->category_id)->get();
+        // $uMayLike = Product::get();
+        return view('User.main.user-detail',compact('item','uMayLike'));
+    }
+
+
     // User Profile lock and unlock
     public function profile(){
         $switch = 'false';
@@ -53,7 +63,6 @@ class UserController extends Controller
     }
 
     // user Filter
-
     public function filter($id){
        $status = $id;
     //    dd($status);

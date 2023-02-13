@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('user')->middleware('isUser')->group(function () {
         // USER HOME
         Route::get('/home',[UserController::class,'home'])->name('user@home');
+        Route::get('pizza/detail/{id}',[UserController::class,'detail'])->name('user@detail');
 
         // USER PROFILE
         Route::get('/profile',[UserController::class,'profile'])->name('user@profile');

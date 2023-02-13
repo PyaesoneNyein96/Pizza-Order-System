@@ -139,18 +139,22 @@
                                             <a class="btn btn-outline-dark btn-square" href="">
                                                 <i class="far fa-heart"></i>
                                             </a>
-                                            <a class="btn btn-outline-dark btn-square" href="">
+                                            <a class="btn btn-outline-dark btn-square"
+                                                href="{{ route('user@detail', $item->id) }}">
                                                 <i class="fa-solid fa-circle-info"></i>
                                             </a>
 
                                         </div>
                                     </div>
+
                                     <div class="text-center py-4">
                                         <a class="h6 text-decoration-none text-truncate"
                                             href="">{{ $item->name }}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5>{{ $item->price }} Kyats</h5>
-                                            <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                            <h5>$ {{ $item->price }}.00 </h5>
+                                            <h6 class="text-muted ml-2">
+                                                <del>{{ $item->price + rand($item->price, $item->price + 100) }}</del>
+                                            </h6>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <small class="fa fa-star text-primary mr-1"></small>
@@ -161,6 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
