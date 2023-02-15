@@ -7,6 +7,10 @@
 
 
 
+    {{-- HIDDEN DARA INFO --}}
+
+    <input type="hidden" value="{{ Auth::id() }}" id="userID">
+    <input type="hidden" value="{{ $item->id }}" id="pizzaID">
 
     <!-- Shop Detail Start -->
     <div class="container-fluid pb-5">
@@ -56,16 +60,27 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control mx-2 rounded bg-light border-1 text-center"
-                                value="1">
+
+                            {{-- COUNT Value  --}}
+                            <input type="text"
+                                class="form-control bg-light shadow-sm border-0 text-lg-center
+                            mx-2 rounded px-2 text-center border-2"
+                                value="0" id="orderCount">
+
+
+
+
+
                             <div class="input-group-btn">
                                 <button class="btn btn-warning btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-outline-info shadow px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        <button class="btn btn-warning text-primary shadow px-3" id="addCartBtn" type="button">
+                            <i class="fa fa-shopping-cart mr-1"></i>
+                            Add To Cart
+                        </button>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
@@ -166,8 +181,8 @@
                                 <div class="col-md-6">
                                     <h4 class="mb-4">1 review for "Product Name"</h4>
                                     <div class="media mb-4">
-                                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                            style="width: 45px;">
+                                        {{-- <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
+                                            style="width: 45px;"> --}}
                                         <div class="media-body">
                                             <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
                                             <div class="text-primary mb-2">
@@ -276,5 +291,36 @@
     </div>
     <!-- Products End -->
 
+
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(() => {
+            $('#addCartBtn').click(() => {
+                $info = {
+                    'count': $('#orderCount').val(),
+                    'userID': $('#userID').val(),
+                    'pizzaID': $('#pizzaID').val(),
+                };
+
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/user/ajax/cart',
+                    data: $info,
+                    dataType: 'json',
+                    success: (res) => {
+                        if (res.status == 'success') {
+                            window.location.href = 'http://localhost:8000/user/home';
+                        }
+                    }
+                })
+
+            });
+
+
+
+        });
+    </script>
 
 @endsection

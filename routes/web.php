@@ -3,6 +3,7 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -84,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/home',[UserController::class,'home'])->name('user@home');
         Route::get('pizza/detail/{id}',[UserController::class,'detail'])->name('user@detail');
 
+
+
+
         // USER PROFILE
         Route::get('/profile',[UserController::class,'profile'])->name('user@profile');
         Route::get('/unlockProfile',[UserController::class,'unlockProfile'])->name('user@unlockProfile');
@@ -92,6 +96,13 @@ Route::middleware(['auth'])->group(function () {
         // Assending & Descending
         Route::prefix('ajax')->group(function () {
            Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
+           Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
+
+        });
+
+        // Cart Manage
+        Route::prefix('cart')->group(function () {
+            Route::get('list',[CartController::class,'list'])->name('user@cartList');
         });
 
         // User Category Filter

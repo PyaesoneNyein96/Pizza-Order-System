@@ -14,6 +14,7 @@ class CategoryController extends Controller
     // ----------------
     public function list(){
 
+
         $data = Category::when(request('searchValue'),function($i){
             $key = request('searchValue');
             $i->where('name','like','%'.$key.'%');

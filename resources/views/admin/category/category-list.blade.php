@@ -113,6 +113,7 @@
                                                 <span> {{ $item->created_at->format('j - M -Y , g:i A') }} </span> |
                                                 <small> {{ $item->created_at->diffForHumans() }}</small>
                                             </td>
+
                                             <td class="bg-light ">
                                                 <div class="table-data-feature d-flex justify-content-center">
                                                     {{-- <button class="item" data-toggle="tooltip" data-placement="top"

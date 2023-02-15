@@ -104,24 +104,26 @@
                                 <a href="" class="nav-item nav-link active">Home</a>
                             @endguest
 
-                            <a href="cart.html" class="nav-item nav-link">My Cart</a>
+                            <a href="{{ route('user@cartList') }}" class="nav-item nav-link">My Cart</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
 
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             @auth
-                                @if (url()->current() == route('user@home'))
-                                    <a href="" class="btn px-0">
-                                        <i class="fas fa-heart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle"
-                                            style="padding-bottom: 2px;">0</span>
+                                {{-- @if (url()->current() == route('user@home')) --}}
+                                <a href="" class="btn px-0">
+                                    <i class="fas fa-heart text-danger fa-beat fa-lg "></i>
+                                    <span class="badge text-secondary border border-secondary rounded-circle"
+                                        style="padding-bottom: 2px;">0</span>
+                                </a>
+                                <a href="" class="btn px-0 ml-3">
+                                    <a href="{{ route('user@cartList') }}" class="text-decoration-none">
+                                        <i class="fas fa-shopping-cart text-warning fa-bounce fa-lg "></i>
+                                        <span class="badge text-light border border-danger rounded-circle"
+                                            style="padding-bottom: 2px;">{{ count(Auth::user()->Cart) }}</span>
                                     </a>
-                                    <a href="" class="btn px-0 ml-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle"
-                                            style="padding-bottom: 2px;">0</span>
-                                    </a>
-                                @endif
+                                </a>
+                                {{-- @endif --}}
                             @endauth
 
 
@@ -267,7 +269,7 @@
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
+                {{-- <img class="img-fluid" src="img/payments.png" alt=""> --}}
             </div>
         </div>
     </div>

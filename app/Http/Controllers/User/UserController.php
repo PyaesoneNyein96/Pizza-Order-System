@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
+use Storage;
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -18,6 +19,8 @@ class UserController extends Controller
         $products = Product::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
         $status='all';
+        // $cart = Cart::where('user_id', Auth::id())->get();
+        // return view('User.main.user-home',compact('products','categories','cart','status'));
         return view('User.main.user-home',compact('products','categories','status'));
 
     }

@@ -183,15 +183,6 @@
     <script>
         $(document).ready(() => {
 
-            // $.ajax({
-            //     type: 'get',
-            //     url: 'http://localhost:8000/user/ajax/pizza/list',
-            //     dataType: 'json',
-            //     success: (res) => {
-            //         console.log(res);
-            //     }
-            // })
-
             $('#sortingOption').change(() => {
                 $eventOption = $('#sortingOption').val();
                 if ($eventOption == 'asc') {
