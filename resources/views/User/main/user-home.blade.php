@@ -174,7 +174,7 @@
                 if ($eventOption == 'asc') {
                     $.ajax({
                         type: 'get',
-                        url: 'http://localhost:8000/ajax/pizza/list',
+                        url: 'http://localhost:8000/ajax/products/list',
                         data: {
                             'status': 'asc'
                         },
@@ -196,7 +196,7 @@
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="far fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-outline-dark btn-square" href="{{ route('user@detail', $item->id) }}">
+                                                    <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="fa-solid fa-circle-info"></i>
                                                     </a>
 
@@ -231,7 +231,7 @@
                 } else if ($eventOption == 'des') {
                     $.ajax({
                         type: 'get',
-                        url: 'http://localhost:8000/ajax/pizza/list',
+                        url: 'http://localhost:8000/ajax/products/list',
                         data: {
                             'status': 'des'
                         },
@@ -252,7 +252,7 @@
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="far fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-outline-dark btn-square" href="{{ route('user@detail', $item->id) }} ">
+                                                    <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="fa-solid fa-circle-info"></i>
                                                     </a>
 

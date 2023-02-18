@@ -216,7 +216,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Your Email Address">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary">Sign Up</button>
+                                    <button class="btn btn-warning ms-2 text-secondary">Sign Up</button>
                                 </div>
                             </div>
                         </form>

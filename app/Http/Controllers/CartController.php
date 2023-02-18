@@ -13,7 +13,7 @@ class CartController extends Controller
             $carts = Cart::select('carts.*','products.name as productName','products.price as productPrice','products.image as img')
             ->leftJoin('products','products.id','carts.product_id')
             ->where('carts.user_id',Auth::id())->get();
-
+            // dd($carts->toArray());
             $total = 0;
             foreach ($carts as $cart) {
                 // dd($cart->productPrice);

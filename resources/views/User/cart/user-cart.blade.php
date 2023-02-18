@@ -28,6 +28,15 @@
 
                                 </td>
                                 <td class="align-middle"> {{ $cart->productName }}</td>
+
+                                {{-- Hidden Value  --}}
+                                {{-- <td class="align-middle"> --}}
+                                <input type="hidden" id="product_id" value="{{ $cart->product_id }}">
+                                <input type="hidden" id="user_id" value="{{ $cart->user_id }}">
+                                {{-- </td> --}}
+
+                                {{-- Hidden Value  --}}
+
                                 <td class="align-middle text-success" id="dbPrice">{{ $cart->productPrice }}Kyats
                                 </td>
 
@@ -96,8 +105,9 @@
                                 <h5>Total</h5>
                                 <h5 class="text-success" id='final'>{{ $total + 200 }} Kyats</h5>
                             </div>
-                            <button class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">Proceed To
-                                Checkout</button>
+                            <button id="orderBtn" class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">
+                                Proceed To Checkout
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -113,5 +123,24 @@
 @section('script')
 
     <script src="{{ asset('user/js/cart.js') }}"></script>
+
+    <script>
+        $('#orderBtn').click(function() {
+            $orderList = [];
+            $orderCode = Math.floor(Math.random() * (1 + 100));
+            $('#cartTable tr').each(function(index, row) {
+                $orderList.push({
+                    'userId': $(row).find('#user_id').val(),
+                    'productId': $(row).find('#product_id').val(),
+                    'quantity': $(row).find('#quantity').val(),
+                    'total': $(row).find('#hide').val(),
+                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val(),
+                })
+            });
+            console.log($orderList);
+
+        })
+    </script>
+
 
 @endsection

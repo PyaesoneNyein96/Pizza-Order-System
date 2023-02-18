@@ -35,7 +35,7 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
 
    // Ascending & Descending
    Route::prefix('ajax')->group(function () {
-        Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
+        Route::get('products/list',[AjaxController::class,'pizzaList'])->name('ajax@productsList');
         Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
     });
 

@@ -63,7 +63,7 @@
                             </div>
 
                             {{-- COUNT Value  --}}
-                            <input type="text"
+                            <input type="text" disabled min="1"
                                 class="form-control bg-light shadow-sm border-0 text-lg-center
                             mx-2 rounded px-2 text-center border-2"
                                 value="0" id="orderCount">
@@ -307,10 +307,11 @@
 
                 $.ajax({
                     type: 'get',
-                    url: 'http://localhost:8000/user/ajax/cart',
+                    url: 'http://localhost:8000/ajax/cart',
                     data: $info,
                     dataType: 'json',
                     success: (res) => {
+                        console.log('ss')
                         if (res.status == 'success') {
                             window.location.href = 'http://localhost:8000/user/home';
                         }
