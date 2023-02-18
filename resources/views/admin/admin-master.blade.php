@@ -81,7 +81,6 @@
                         <li>
                             <a href="{{ route('admin@productList') }}"
                                 class="text-decoration-none @if (url()->current() == route('admin@productList')) text-danger @endif">
-                                {{-- <i class="fa fa-list" aria-hidden="true"></i> --}}
                                 <i class="fa-solid fa-pizza-slice"></i>
                                 Product
                             </a>
@@ -244,7 +243,10 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script> --}}
     <!-- Bootstrap JS-->
     <script src="{{ asset('admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>

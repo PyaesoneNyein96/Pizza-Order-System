@@ -19,7 +19,7 @@ class Product extends Model
         'description',
         'price',
         'view_count',
-        'baking_time'
+        'waiting_time'
     ];
 
     public function Category(){

@@ -34,10 +34,8 @@
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="h3 my-4 text-muted ">
-                                                    <span class="p-2 bg-success text-light rounded">
-                                                        {{ $data->name }}
-                                                    </span>
+                                                <div class="h4 mb-4  p-2 bg-success text-light rounded ps-3">
+                                                    {{ $data->name }}
                                                 </div>
 
                                                 <div class="h6 card-text mb-2">
@@ -52,8 +50,8 @@
                                                 </div>
 
                                                 <div class="h6 cardard-text mb-2">
-                                                    <span class="h6">Baking Time: </span>
-                                                    {{ $data->baking_time }} <small>mins</small>
+                                                    <span class="h6">Waiting Time: </span>
+                                                    {{ $data->waiting_time }} <small>Days</small>
                                                 </div>
 
                                                 <div class="h6 cardard-text mb-2">
@@ -63,7 +61,7 @@
 
                                                 <div class="h6 cardard-text mb-5">
                                                     <span class="h6">Since: </span>
-                                                    {{ $data->created_at }}
+                                                    {{ $data->created_at->format('d-M-Y') }}
                                                 </div>
 
                                                 <div class="description mb-2">

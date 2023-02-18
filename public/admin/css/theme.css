@@ -48,6 +48,14 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 
+.bg-dark-custom {
+    background-color: #3d464d !important;
+}
+
+.text-green {
+    color: #28a745;
+}
+
 .bg-d-light {
     background-color: rgba(169, 196, 205, 0.389);
 }
@@ -1303,6 +1311,7 @@ section {
         top: 0;
         left: 0;
         height: 170px;
+
     }
 }
 

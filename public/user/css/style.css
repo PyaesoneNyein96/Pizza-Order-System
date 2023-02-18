@@ -39,17 +39,22 @@
 
 /* CUSTOMIZE START  */
 
+.text-green {
+    color: var(--green);
+}
+
 .w-90 {
     width: 90% !important;
 }
 .img-wrap {
-    width: fit-content;
+    /* max-width: 300px; */
+    /* width: min-content; */
 }
 
 .img-wrap img {
     object-fit: cover;
-    width: 250px;
-    height: 250px;
+    width: auto;
+    height: auto;
 }
 
 .user-profile-badge img {

@@ -83,12 +83,12 @@
                             </div>
 
                             <div class="form-group mb-4">
-                                <label class="control-label mb-1">Baking time</label>
-                                <input name="productBakingTime" type="number" min="0"
-                                    value="{{ $item->baking_time ?? old('productBakingTime') }}"
-                                    class="form-control @error('productBakingTime') is-invalid @enderror"
-                                    placeholder="Baking Time...">
-                                @error('productBakingTime')
+                                <label class="control-label mb-1">Waiting time</label>
+                                <input name="productWaitingTime" type="number" min="0"
+                                    value="{{ $item->waiting_time ?? old('productWaitingTime') }}"
+                                    class="form-control @error('productWaitingTime') is-invalid @enderror"
+                                    placeholder="Waiting Time...">
+                                @error('productWaitingTime')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>

@@ -61,6 +61,7 @@
                                     alt="CoolAdmin">
                             </a>
                         </div> --}}
+
                         @yield('content')
 
                     </div>
@@ -71,10 +72,15 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {{-- <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script> --}}
     <!-- Bootstrap JS-->
+
     <script src="{{ asset('admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
-    <script src="{{ asset('admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">

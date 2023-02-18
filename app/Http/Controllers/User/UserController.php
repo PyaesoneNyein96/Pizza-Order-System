@@ -22,7 +22,6 @@ class UserController extends Controller
         // $cart = Cart::where('user_id', Auth::id())->get();
         // return view('User.main.user-home',compact('products','categories','cart','status'));
         return view('User.main.user-home',compact('products','categories','status'));
-
     }
 
     //Detail
@@ -71,7 +70,11 @@ class UserController extends Controller
     //    dd($status);
        $products = Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
        $categories = Category::get();
-       return view('User.main.user-home',compact('products','categories','status'));
+    //    dd($products->toArray());
+        if(Auth::check()){
+            return view('User.main.user-home',compact('products','categories','status'));
+        }
+        return view('User.main.user-home',compact('products','categories','status'));
     }
 
 

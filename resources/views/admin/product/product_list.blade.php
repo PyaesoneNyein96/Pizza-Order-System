@@ -102,7 +102,7 @@
                                         <th> name</th>
                                         <th> Category</th>
                                         {{-- <th> Description</th> --}}
-                                        <th> Baking Time</th>
+                                        <th> Waiting Time</th>
                                         <th> Price</th>
                                         <th> Views</th>
 
@@ -121,7 +121,8 @@
                                                 <div class="img-wrap border shadow d-flex align-items-center">
                                                     <a href="{{ route('admin@detailProduct', $item->id) }}">
                                                         <img src="{{ asset('storage/product/' . $item->image) }}"
-                                                            class="product-img shadow-sm ">
+                                                            class="product-img shadow-sm"
+                                                            style="object-fit:contain;width:150px;height:120px">
                                                     </a>
                                                 </div>
                                             </td>
@@ -135,7 +136,7 @@
                                                 <span>{{ Str::words($item->description, 10, '...etc....') }}</span>
                                             </td> --}}
                                             <td>
-                                                <span> {{ $item->baking_time }} min</span>
+                                                <span> {{ $item->waiting_time }} days</span>
                                             </td>
                                             <td>
                                                 <span> $ {{ $item->price }}</span>

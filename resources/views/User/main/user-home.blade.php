@@ -14,7 +14,7 @@
 
             <div class="col-lg-3 col-md-4" style="position:relative">
                 <!-- Price Start -->
-                <div class="wrap" style="position:sticky; top:90px ;">
+                <div class="wrap" style="position:sticky; top:100px ;">
                     <h5 class="section-title text-uppercase mb-3 ">
                         <span class=" pr-3"> Filter by Categories</span>
                     </h5>
@@ -33,7 +33,7 @@
                                 </label>
 
                                 <span class="badge border font-weight-normal mb-2 text-light">
-                                    {{ $status ? count($products) : count($categories) }}
+                                    {{ $status ? count($categories) : count($categories) }}
                                 </span>
 
                             </div>
@@ -54,7 +54,8 @@
                                 </div>
                             @endforeach
                             <div class="custom-control custom-checkbox  py-1 text-dark mb-3">
-                                <a href="{{ route('user@home') }}" class="text-decoration-none w-100 d-block"
+                                <a href="{{ route(Auth::check() ? 'user@home' : 'home') }}"
+                                    class="text-decoration-none w-100 d-block"
                                     onclick="document.getElementById('all').checked=true"
                                     class="p-1 text-decoration-none text-dark">
                                     <input type="checkbox" id="all" class="custom-control-input"
@@ -89,31 +90,13 @@
                                 <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
                             </div>
                             <div class="ml-2">
-                                {{-- <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
-                                        data-toggle="dropdown">Sorting</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Latest</a>
-                                        <a class="dropdown-item" href="#">Ascending</a>
-                                        <a class="dropdown-item" href="#">By Naming Order</a>
-                                    </div>
-                                </div> --}}
+
                                 <select name="sorting" id="sortingOption" class="form-control form-control-sm shadow-none">
                                     <option value="" selected hidden disabled>- Order By</option>
                                     <option value="asc">Ascending</option>
                                     <option value="des">Descending</option>
                                 </select>
 
-
-                                {{-- <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle"
-                                        data-toggle="dropdown">Showing</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">10</a>
-                                        <a class="dropdown-item" href="#">20</a>
-                                        <a class="dropdown-item" href="#">30</a>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -122,16 +105,16 @@
                         @if ($products->isEmpty())
                             <div class="bg-light shadow p-3 border   rounded text-center mt-5">
                                 <span class="text-secondary h3">
-                                    There is no Pizza <i class="fa-solid fa-pizza-slice text-warning"></i> !!
+                                    <i class="fa-solid fa-square-xmark text-danger"></i> Out of Stock :-(
                                 </span>
                             </div>
                         @endif
                         @foreach ($products as $item)
-                            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                                <div class="product-item bg-light mb-4" id="ajaxData">
+                            <div class="col-lg-4 col-md-6 col-sm-6 pb-1 ">
+                                <div class="product-item bg-light mb-4 shadow-sm" id="ajaxData">
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" src="{{ asset('storage/product/' . $item->image) }}"
-                                            alt="" style="height:250px; object-fit:cover">
+                                            alt="" style="height:250px; object-fit:contain">
                                         <div class="product-action">
                                             <a class="btn btn-outline-dark btn-square" href="">
                                                 <i class="fa fa-shopping-cart"></i>
@@ -148,12 +131,15 @@
                                     </div>
 
                                     <div class="text-center py-4">
-                                        <a class="h6 text-decoration-none text-truncate"
-                                            href="">{{ $item->name }}</a>
+                                        <a class="h6 text-decoration-none" href="">
+                                            <p class="text-truncate px-2">
+                                                {{ $item->name }}
+                                        </a>
+                                        </p>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
                                             <h5>$ {{ $item->price }}.00 </h5>
                                             <h6 class="text-muted ml-2">
-                                                <del>{{ $item->price + rand($item->price, $item->price + 100) }}</del>
+                                                <del>{{ rand($item->price + 30, $item->price + 100) }} $</del>
                                             </h6>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
@@ -188,12 +174,13 @@
                 if ($eventOption == 'asc') {
                     $.ajax({
                         type: 'get',
-                        url: 'http://localhost:8000/user/ajax/pizza/list',
+                        url: 'http://localhost:8000/ajax/pizza/list',
                         data: {
                             'status': 'asc'
                         },
                         dataType: 'json',
                         success: (res) => {
+                            // console.log(res)
                             $list = '';
                             for ($i = 0; $i < res.length; $i++) {
                                 $list += `
@@ -201,7 +188,7 @@
                                         <div class="product-item bg-light mb-4" id="ajaxData">
                                             <div class="product-img position-relative overflow-hidden">
                                                 <img class="img-fluid w-100" src="{{ asset('storage/product/${res[$i].image}') }}"
-                                                    alt="" style="height:250px; object-fit:cover">
+                                                    alt="" style="height:250px; object-fit:contain">
                                                 <div class="product-action">
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -209,17 +196,21 @@
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="far fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                    <a class="btn btn-outline-dark btn-square" href="{{ route('user@detail', $item->id) }}">
                                                         <i class="fa-solid fa-circle-info"></i>
                                                     </a>
 
                                                 </div>
                                             </div>
                                             <div class="text-center py-4">
-                                                <a class="h6 text-decoration-none text-truncate" href="">${res[$i].name}</a>
+                                                <a class="h6 text-decoration-none" href="">
+                                                    <p class="text-truncate px-2">${res[$i].name}</p>
+                                                    </a>
                                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                                     <h5>${res[$i].price}Kyats</h5>
-                                                    <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                                    <h6 class="text-muted ml-2">
+                                                        <del>${Math.floor(Math.random() * (res[$i].price + 70 - res[$i].price ) + res[$i].price)} $</del>
+                                                    </h6>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                                     <small class="fa fa-star text-primary mr-1"></small>
@@ -240,7 +231,7 @@
                 } else if ($eventOption == 'des') {
                     $.ajax({
                         type: 'get',
-                        url: 'http://localhost:8000/user/ajax/pizza/list',
+                        url: 'http://localhost:8000/ajax/pizza/list',
                         data: {
                             'status': 'des'
                         },
@@ -253,7 +244,7 @@
                                         <div class="product-item bg-light mb-4" id="ajaxData">
                                             <div class="product-img position-relative overflow-hidden">
                                                 <img class="img-fluid w-100" src="{{ asset('storage/product/${res[$i].image}') }}"
-                                                    alt="" style="height:250px; object-fit:cover">
+                                                    alt="" style="height:250px; object-fit:contain">
                                                 <div class="product-action">
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -261,17 +252,20 @@
                                                     <a class="btn btn-outline-dark btn-square" href="">
                                                         <i class="far fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-outline-dark btn-square" href="">
+                                                    <a class="btn btn-outline-dark btn-square" href="{{ route('user@detail', $item->id) }} ">
                                                         <i class="fa-solid fa-circle-info"></i>
                                                     </a>
 
                                                 </div>
                                             </div>
                                             <div class="text-center py-4">
-                                                <a class="h6 text-decoration-none text-truncate" href="">${res[$i].name}</a>
+                                                <a class="h6 text-decoration-none" href="">
+                                                    <p class="text-truncate px-2">${res[$i].name}</p>
+                                                    </a>
                                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                                     <h5>${res[$i].price}Kyats</h5>
-                                                    <h6 class="text-muted ml-2"><del>25000</del></h6>
+                                                    <h6 class="text-muted ml-2">
+                                                        <del>${Math.floor(Math.random() * (res[$i].price + 70 - res[$i].price ) + res[$i].price)} $</del>   </h6>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                                     <small class="fa fa-star text-primary mr-1"></small>

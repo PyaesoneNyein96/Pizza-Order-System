@@ -15,7 +15,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-center">
                                     <div class="img-wrap shadow p-1 m-3">
                                         @if (Auth::user()->image == null && Auth::user()->gender == 'male')
                                             <img src="{{ asset('image/avators/images.jpg') }}" id='profile' />
@@ -51,24 +51,22 @@
                                 <div class="col shadow py-2">
 
 
-                                    {{-- <div
-                                        class="h6 bg-light p-2 rounded w-25 mt-1 shadow-sm text-success text-center
-                                        @if ($switch == 'false') text-danger @endif">
-                                        {{ $switch == 'false' ? 'Profile Locked ' : 'Profile Unlocked' }}
-                                    </div> --}}
+
                                     @if ($switch == 'false')
                                         <div class="h6 bg-light p-2 rounded w-25 mt-1 shadow-sm text-danger text-center">
-                                            Profile Locked <i class="fa fa-lock" aria-hidden="true"></i>
+                                            <span class="d-none d-md-inline">Profile Locked</span>
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
                                         </div>
                                     @else
                                         <div class="h6 bg-light p-2 rounded w-25 mt-1 shadow-sm text-success text-center">
-                                            Profile Unlocked <i class="fa fa-unlock" aria-hidden="true"></i>
+                                            <span class="d-none d-md-inline">Profile Unlocked</span> <i class="fa fa-unlock"
+                                                aria-hidden="true"></i>
                                         </div>
                                     @endif
                                     {{-- <div class="h6 bg-light p-2 rounded w-25 mt-1 shadow-sm text-success text-center"></div> --}}
 
                                     <div class="form-group m-b-10">
-                                        <i class="fas fa-user-circle fa-lg me-3"></i>
+                                        <i class="fas fa-user-circle fa-lg me-3 d-none d-lg-inline"></i>
                                         <input class="form-control d-inline w-90" type="text" name="name"
                                             value="{{ old('name') ?? auth::user()->name }}" @disabled($switch == 'false')>
                                         @error('name')
@@ -78,7 +76,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group m-b-10">
-                                        <i class="fas fa-envelope fa-lg me-3"></i>
+                                        <i class="fas fa-envelope fa-lg me-3 d-none d-lg-inline"></i>
                                         <input class="form-control d-inline w-90" type="text" name="email"
                                             value="{{ old('email') ?? auth::user()->email }}" @disabled($switch == 'false')>
                                         @error('email')
@@ -89,7 +87,7 @@
                                     </div>
                                     <div class="form-group m-b-10">
 
-                                        <i class="fas fa-venus-double  me-3"></i>
+                                        <i class="fas fa-venus-double  me-3 d-none d-lg-inline"></i>
                                         <select name="gender" class="form-select w-90 d-inline"
                                             @disabled($switch == 'false')>
                                             <option value="male" @if (Auth::user()->gender == 'male') selected @endif>
@@ -109,7 +107,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group m-b-10">
-                                        <i class="fas fa-phone fa-lg me-3"></i>
+                                        <i class="fas fa-phone fa-lg me-3 d-none d-lg-inline"></i>
                                         <input class="form-control w-90 d-inline" type="text" name="phone"
                                             value="{{ auth::user()->phone, old('phone') }}" @disabled($switch == 'false')>
                                         @error('phone')
@@ -120,7 +118,7 @@
                                     </div>
                                     <div class="form-group m-b-10 ">
                                         <div class="d-flex m-0 p-0">
-                                            <i class="fas fa-location-arrow fa-lg me-3  mt-2"></i>
+                                            <i class="fas fa-location-arrow fa-lg me-3 d-none d-lg-inline  mt-2"></i>
                                             <textarea name="address" class="form-control  w-90 d-inline ms-1" rows="3" @disabled($switch == 'false')>{{ Auth::user()->address, old('address') }}
                                             </textarea>
 
@@ -133,7 +131,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group m-b-10">
-                                        <i class="fas fa-tag fa-lg me-3"></i>
+                                        <i class="fas fa-tag fa-lg me-3 d-none d-lg-inline"></i>
                                         <input class="form-control w-90 d-inline" type="text" name="role"
                                             value="{{ auth::user()->role }}" @disabled($switch)>
                                         @error('role')
@@ -143,7 +141,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group m-b-10">
-                                        <i class="fa-solid fa-check fa-lg me-3"></i>
+                                        <i class="fa-solid fa-check fa-lg me-3 d-none d-lg-inline"></i>
                                         <input class="form-control w-90 d-inline" type="text" name="role"
                                             value="{{ auth::user()->status }}" @disabled($switch)>
                                         @error('role')
@@ -156,12 +154,12 @@
                                     <div class="form-group m-b-10">
 
                                         @if (Auth::user()->created_at == Auth::user()->updated_at)
-                                            <i class="far fa-clock fa-lg me-3 text-success"></i>
+                                            <i class="far fa-clock fa-lg me-3 text-success d-none d-lg-inline"></i>
                                             <input class="form-control w-90 d-inline" type="text"
                                                 value="{{ auth::user()->created_at->format('j - M - Y') }}Created time "
                                                 @disabled($switch)>
                                         @else
-                                            <i class="far fa-clock fa-lg me-3 text-danger"></i>
+                                            <i class="far fa-clock fa-lg me-3 text-danger d-none d-lg-inline"></i>
                                             <input class="form-control w-90 d-inline text-muted" type="text"
                                                 value="{{ auth::user()->updated_at->format('j - M - Y, (h:i:s A) ') }} updated!!!"
                                                 @disabled($switch)>

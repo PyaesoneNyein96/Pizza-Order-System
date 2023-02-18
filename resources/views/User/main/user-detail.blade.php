@@ -19,7 +19,8 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner bg-light">
                         <div class="carousel-item active">
-                            <img class="w-100 h-100" src="{{ asset('storage/product/' . $item->image) }}" alt="Image">
+                            <img class="w-100 " src="{{ asset('storage/product/' . $item->image) }}"
+                                style="max-height:600px; object-fit:contain;">
                         </div>
 
                     </div>
@@ -248,6 +249,7 @@
 
         <div class="row px-xl-5">
             <div class="col">
+
                 <div class="owl-carousel related-carousel">
                     @foreach ($uMayLike as $uml)
                         <div class="product-item bg-light">
@@ -282,9 +284,8 @@
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
+
             </div>
         </div>
 
@@ -296,7 +297,7 @@
 
 @section('script')
     <script>
-        $(document).ready(() => {
+        $(document).ready(function() {
             $('#addCartBtn').click(() => {
                 $info = {
                     'count': $('#orderCount').val(),

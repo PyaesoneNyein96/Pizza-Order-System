@@ -21,7 +21,7 @@ class CartController extends Controller
             }
                 // dd($total);
 
-            return view('User.cart.user-card',compact('carts','total'));
+            return view('User.cart.user-cart',compact('carts','total'));
         }
 
 

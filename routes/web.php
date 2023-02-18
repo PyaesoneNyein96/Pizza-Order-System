@@ -22,7 +22,7 @@ Route::redirect('/', 'auth/home');
 
 // ======== LOGIN - REGISTER +++++++
 Route::prefix('auth')->middleware('basicAuth')->group(function () {
-    // HOME FOR ALL USER
+    // HOME FOR ALL USER & NON-USER
     Route::get('/home',[UserController::class,'home'])->name('home');
 
     Route::get('login',[ AuthController::class,'loginPage'])->name('auth@login');
@@ -33,9 +33,19 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
 });
 
 
+   // Ascending & Descending
+   Route::prefix('ajax')->group(function () {
+        Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
+        Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
+    });
+
+    // User Category Filter
+    Route::get('filter/{id}',[UserController::class,'filter'])->name('user@filter');
+
+
 Route::middleware(['auth'])->group(function () {
 
-// =====ADMIN=====
+// ===== ADMIN =====
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
         // ADMIN DASHBOARD
         Route::get('/dashboard',[AdminController::class,'adminDashboard'])->name('admin@dashboard');
@@ -45,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/unlockProfile',[AdminController::class,'unlockProfile'])->name('admin@unlockProfile');
         Route::post('profileEdit/{id}',[AdminController::class,'profileEdit'])->name('admin@profileEdit');
 
-        // CATEGORY
+        // ADMIN CATEGORY
         Route::prefix('category')->group(function () {
             Route::get('list', [CategoryController::class,'list'])->name('admin@categoryList');
             Route::get('createPage',[CategoryController::class,'createCategoryPage'])->name('admin@CreateCategoryPage');
@@ -55,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('update/{id}',[CategoryController::class,'updateCategory'])->name('admin@UpdateCategory');
         });
 
-        // PRODUCT
+        // ADMIN PRODUCT
         Route::prefix('product')->group(function () {
             Route::get('list',[ProductController::class,'list'])->name('admin@productList');
             Route::get('createPage',[ProductController::class,'productCreatePage'])->name('admin@createProductPage');
@@ -85,28 +95,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/home',[UserController::class,'home'])->name('user@home');
         Route::get('pizza/detail/{id}',[UserController::class,'detail'])->name('user@detail');
 
-
-
-
         // USER PROFILE
         Route::get('/profile',[UserController::class,'profile'])->name('user@profile');
         Route::get('/unlockProfile',[UserController::class,'unlockProfile'])->name('user@unlockProfile');
         Route::post('profileEdit/{id}',[UserController::class,'profileEdit'])->name('user@profileEdit');
 
-        // Assending & Descending
-        Route::prefix('ajax')->group(function () {
-           Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax@pizzaList');
-           Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
 
-        });
 
         // Cart Manage
         Route::prefix('cart')->group(function () {
             Route::get('list',[CartController::class,'list'])->name('user@cartList');
         });
 
-        // User Category Filter
-        Route::get('user/filter/{id}',[UserController::class,'filter'])->name('user@filter');
+
 
     });
 

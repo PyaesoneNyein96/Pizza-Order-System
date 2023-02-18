@@ -116,7 +116,7 @@ class ProductController extends Controller
             'productDescription' => 'required|min:10',
             'productPrice' => 'required|numeric',
             'productCategory' => 'required',
-            'productBakingTime' => 'required|numeric',
+            'productWaitingTime' => 'required|numeric',
             // 'productImage' => 'required|mimes:png,jpg,jpeg,webp|file',
         ];
         if($situation == 'update'){
@@ -135,7 +135,7 @@ class ProductController extends Controller
             'description' => $req->productDescription,
             'price' => $req->productPrice,
             'category_id' => $req->productCategory,
-            'baking_time' => $req->productBakingTime,
+            'waiting_time' => $req->productWaitingTime,
         ];
     }
 }
