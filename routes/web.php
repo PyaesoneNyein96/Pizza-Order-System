@@ -37,6 +37,8 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
    Route::prefix('ajax')->group(function () {
         Route::get('products/list',[AjaxController::class,'pizzaList'])->name('ajax@productsList');
         Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
+
+        Route::get('order',[AjaxController::class,'order'])->name('ajax@order');
     });
 
     // User Category Filter

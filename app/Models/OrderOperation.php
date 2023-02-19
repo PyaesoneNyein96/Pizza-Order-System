@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderOpertaion extends Model
+class OrderOperation extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class OrderOpertaion extends Model
         'user_id',
         'product_id',
         'quantity',
+        'total',
         'order_code',
     ];
-
 }

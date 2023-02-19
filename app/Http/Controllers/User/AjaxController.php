@@ -6,7 +6,10 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\OrderOperation;
+use App\Models\OrderOpertaion;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -33,6 +36,30 @@ class AjaxController extends Controller
          return response()->json($res, 200);
 
     }
+
+    // Order
+    public function order(){
+        logger(request()->all());
+        foreach(request()->all() as $item){
+            OrderOperation::create([
+                'user_id' => $item['user_id'],
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'total' => $item['total'],
+                'order_code' => $item['order_code'],
+            ]);
+        }
+
+        Cart::where('user_id',Auth::id())->delete();
+        return response()->json(
+           ['sms' => 'Order Process Successfully'], 200);
+    }
+
+
+
+
+
+
 
 
 

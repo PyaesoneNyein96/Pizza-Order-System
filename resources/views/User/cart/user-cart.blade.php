@@ -127,17 +127,26 @@
     <script>
         $('#orderBtn').click(function() {
             $orderList = [];
-            $orderCode = Math.floor(Math.random() * (1 + 100));
+            $orderCode = Math.floor(Math.random() * (1 + 1000));
             $('#cartTable tr').each(function(index, row) {
                 $orderList.push({
-                    'userId': $(row).find('#user_id').val(),
-                    'productId': $(row).find('#product_id').val(),
+                    'user_id': $(row).find('#user_id').val(),
+                    'product_id': $(row).find('#product_id').val(),
                     'quantity': $(row).find('#quantity').val(),
                     'total': $(row).find('#hide').val(),
-                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val(),
+                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val() + 'p',
                 })
             });
-            console.log($orderList);
+            // console.log($orderList);
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:8000/ajax/order',
+                data: Object.assign({}, $orderList),
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res)
+                }
+            })
 
         })
     </script>
