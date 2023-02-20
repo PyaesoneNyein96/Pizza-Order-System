@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\OrderOperation;
@@ -27,7 +28,7 @@ class AjaxController extends Controller
 
     public function addToCart(Request $request){
         $data = $this->getData(request());
-        logger($data);
+        // logger($data);
         Cart::create($data);
         $res = [
             'sms' => 'add to cart Completed',
@@ -38,21 +39,41 @@ class AjaxController extends Controller
     }
 
     // Order
+
+
+
     public function order(){
-        logger(request()->all());
+        // logger(request()->all());
+        $total = 0;
         foreach(request()->all() as $item){
-            OrderOperation::create([
+        if($item['quantity'] == 0){
+                return response()->json(['status' => 'at least u have to order 1 item '], 200);
+            }
+
+        $data =  OrderOperation::create([
                 'user_id' => $item['user_id'],
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
                 'total' => $item['total'],
                 'order_code' => $item['order_code'],
             ]);
+
+            $total += $item['total'];
         }
 
+        logger($total);
         Cart::where('user_id',Auth::id())->delete();
+
+        Order::create([
+            'user_id' => Auth::id(),
+            'order_code' => $data->order_code,
+            'total_price' => $total + 100,
+        ]);
+
         return response()->json(
-           ['sms' => 'Order Process Successfully'], 200);
+           ['sms' => 'Order Process Successfully',
+            'status' => true
+            ], 200);
     }
 
 

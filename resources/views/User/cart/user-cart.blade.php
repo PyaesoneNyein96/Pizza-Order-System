@@ -103,7 +103,7 @@
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5 class="text-success" id='final'>{{ $total + 200 }} Kyats</h5>
+                                <h5 class="text-success" id='final'>{{ $total + 100 }} Kyats</h5>
                             </div>
                             <button id="orderBtn" class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">
                                 Proceed To Checkout
@@ -127,14 +127,16 @@
     <script>
         $('#orderBtn').click(function() {
             $orderList = [];
-            $orderCode = Math.floor(Math.random() * (1 + 1000));
+            $alph = 'ABCDEFGHIJ';
+            $al = $alph[Math.floor(Math.random() * $alph.length)];
+            $orderCode = Math.floor(Math.random() * (1 + 9999));
             $('#cartTable tr').each(function(index, row) {
                 $orderList.push({
                     'user_id': $(row).find('#user_id').val(),
                     'product_id': $(row).find('#product_id').val(),
                     'quantity': $(row).find('#quantity').val(),
                     'total': $(row).find('#hide').val(),
-                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val() + 'p',
+                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val() + '_' + $al,
                 })
             });
             // console.log($orderList);
@@ -144,7 +146,10 @@
                 data: Object.assign({}, $orderList),
                 dataType: 'json',
                 success: function(res) {
-                    console.log(res)
+                    console.log(res.status);
+                    if (res.status == true) {
+                        window.location.href = 'http://localhost:8000/user/home'
+                    }
                 }
             })
 
