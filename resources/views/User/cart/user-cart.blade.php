@@ -108,6 +108,9 @@
                             <button id="orderBtn" class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">
                                 Proceed To Checkout
                             </button>
+                            <button id="clearBtn" class="btn btn-block btn-danger font-weight-bold my-3 py-2">
+                                Cancel ALL
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -136,7 +139,7 @@
                     'product_id': $(row).find('#product_id').val(),
                     'quantity': $(row).find('#quantity').val(),
                     'total': $(row).find('#hide').val(),
-                    'order_code': $orderCode + '_Order_Uid:' + $('#user_id').val() + '_' + $al,
+                    'order_code': $orderCode + '_' + $al + '_Order_Uid:' + $('#user_id').val(),
                 })
             });
             // console.log($orderList);
@@ -153,7 +156,24 @@
                 }
             })
 
-        })
+        });
+
+        // Clear Cart Process
+
+        $('#clearBtn').click(function() {
+            // Ajax
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:8000/ajax/clearCart',
+                dataType: 'json',
+            });
+
+            $parentNote = $('#cartTable');
+            $parentNote.remove();
+            $('#subtotal').html('0');
+            $('#final').html('0');
+
+        });
     </script>
 
 

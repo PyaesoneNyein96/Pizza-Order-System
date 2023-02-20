@@ -49,7 +49,6 @@ class AjaxController extends Controller
         if($item['quantity'] == 0){
                 return response()->json(['status' => 'at least u have to order 1 item '], 200);
             }
-
         $data =  OrderOperation::create([
                 'user_id' => $item['user_id'],
                 'product_id' => $item['product_id'],
@@ -57,13 +56,10 @@ class AjaxController extends Controller
                 'total' => $item['total'],
                 'order_code' => $item['order_code'],
             ]);
-
             $total += $item['total'];
+            // $total += $data->total;
         }
-
-        logger($total);
         Cart::where('user_id',Auth::id())->delete();
-
         Order::create([
             'user_id' => Auth::id(),
             'order_code' => $data->order_code,
@@ -75,6 +71,14 @@ class AjaxController extends Controller
             'status' => true
             ], 200);
     }
+
+    // ==========
+    // Clear Cart
+
+    public function clearCart(){
+        Cart::where('user_id', Auth::id())->delete();
+    }
+
 
 
 

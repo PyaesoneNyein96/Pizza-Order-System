@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cart;
+use App\Models\Order;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +22,9 @@ class User extends Authenticatable
 
     public function Cart(){
         return $this->hasMany(Cart::class);
+    }
+    public function Order(){
+        return $this->hasMany(Order::class);
     }
 
     /**

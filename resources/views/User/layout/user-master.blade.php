@@ -83,21 +83,29 @@
 
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             @auth
-                                {{-- @if (url()->current() == route('user@home')) --}}
-                                <a href="" class="btn px-0">
-                                    <i class="fas fa-heart text-danger fa-beat fa-lg "></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                        style="padding-bottom: 2px;">0</span>
-                                </a>
-                                <a href="" class="btn px-0 ml-3">
-                                    <a href="{{ route('user@cartList') }}" class="text-decoration-none">
-                                        <i class="fas fa-shopping-cart text-warning fa-bounce fa-lg"
-                                            style="--fa-animation-duration: 2.5s;"></i>
-                                        <span class="badge text-light border border-danger rounded-circle pe-2">
-                                            {{ count(Auth::user()->Cart) }}</span>
+
+
+                                @if (!Auth::user()->order->isEmpty())
+                                    <a href="{{ route('user@cartHistory') }}" class="text-decoration-none">
+                                        <i class="fa-solid fa-list-check fa-fade text-info fa-lg position-relative pe-1"
+                                            style="--fa-animation-duration: 2s;"></i>
+                                        <span
+                                            class="badge text-light border-danger border rounded-circle
+                                        pe-2 translate-middle badge rounded-pill">
+                                            {{ count(Auth::user()->order) }}
+
+                                        </span>
                                     </a>
+                                @endif
+
+                                <a href="{{ route('user@cartList') }}" class="text-decoration-none">
+                                    <i class="fas fa-shopping-cart text-warning fa-bounce fa-lg position-relative pe-1"
+                                        style="--fa-animation-duration: 2.5s;"></i>
+                                    <span
+                                        class="badge text-light border border-danger rounded-circle pe-2   translate-middle badge rounded-pill">
+                                        {{ count(Auth::user()->Cart) }}</span>
                                 </a>
-                                {{-- @endif --}}
+
                             @endauth
 
 

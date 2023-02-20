@@ -6,6 +6,7 @@ use Storage;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -19,9 +20,12 @@ class UserController extends Controller
         $products = Product::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
         $status='all';
+
+        $history = Order::where('user_id', Auth::id())->get();
+
         // $cart = Cart::where('user_id', Auth::id())->get();
         // return view('User.main.user-home',compact('products','categories','cart','status'));
-        return view('User.main.user-home',compact('products','categories','status'));
+        return view('User.main.user-home',compact('products','categories','status', 'history'));
     }
 
     //Detail

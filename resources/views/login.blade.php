@@ -4,8 +4,10 @@
 @section('content')
     <div class="login-logo">
         <a href="#" class="text-decoration-none">
-            <img src="{{ asset('admin/images/icon/pizza.png') }}" class="w-75 shadow-sm" alt="CoolAdmin">
-            <h3 class="brand-font text-orange">Pizza Galaxy Login</h3>
+            <img src="{{ asset('admin/images/logo-icon/online-shopping.png') }}" class="w-75 shadow-sm" alt="CoolAdmin">
+            <span class="h2 text-warning mx-2 py-2">
+                Galaxy <span class="text-green">Shop</span>.io
+            </span>
         </a>
     </div>
     <div class="login-form">

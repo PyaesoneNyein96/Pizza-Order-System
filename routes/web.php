@@ -39,6 +39,7 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
         Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
 
         Route::get('order',[AjaxController::class,'order'])->name('ajax@order');
+        Route::get('clearCart', [AjaxController::class,'clearCart'])->name('ajax@clearCart');
     });
 
     // User Category Filter
@@ -107,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
         // Cart Manage
         Route::prefix('cart')->group(function () {
             Route::get('list',[CartController::class,'list'])->name('user@cartList');
+            Route::get('history', [CartController::class,'cartHistory'])->name('user@cartHistory');
         });
 
 

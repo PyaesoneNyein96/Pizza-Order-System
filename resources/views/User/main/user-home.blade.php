@@ -111,6 +111,7 @@
                         @endif
                         @foreach ($products as $item)
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1 ">
+
                                 <div class="product-item bg-light mb-4 shadow-sm" id="ajaxData">
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" src="{{ asset('storage/product/' . $item->image) }}"
