@@ -25,15 +25,18 @@ class CartController extends Controller
             return view('User.cart.user-cart',compact('carts','total'));
         }
 
+        // =================
+        // Cart History
+        // =================
 
         public function cartHistory(){
 
              $orders = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
 
             return view('User.cart.user-histroy-card',compact('orders'));
-
-
         }
+
+
 
 
 }

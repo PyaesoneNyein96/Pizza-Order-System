@@ -21,6 +21,7 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle" id="cartTable">
+
                         @foreach ($carts as $cart)
                             <tr>
                                 <td class="align-middle"><img src="{{ asset('storage/product/' . $cart->img) }}"
@@ -33,6 +34,7 @@
                                 {{-- <td class="align-middle"> --}}
                                 <input type="hidden" id="product_id" value="{{ $cart->product_id }}">
                                 <input type="hidden" id="user_id" value="{{ $cart->user_id }}">
+                                <input type="hidden" id="card_id" value="{{ $cart->id }}">
                                 {{-- </td> --}}
 
                                 {{-- Hidden Value  --}}
@@ -79,6 +81,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if ($carts->isEmpty())
+                    <div class="bg-secondary rounded p-4 text-center shadow-sm">
+                        <span class="text-light h5">
+                            There is no Cart items yet!
+                        </span>
+                    </div>
+                @endif
             </div>
 
 
@@ -103,7 +112,8 @@
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5 class="text-success" id='final'>{{ $total + 100 }} Kyats</h5>
+                                <h5 class="text-success" id='final'>{{ $total != 0 ? $total + 100 : $total }} Kyats
+                                </h5>
                             </div>
                             <button id="orderBtn" class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">
                                 Proceed To Checkout
@@ -172,8 +182,9 @@
             $parentNote.remove();
             $('#subtotal').html('0');
             $('#final').html('0');
-
         });
+
+        //  Remove cart item Each one
     </script>
 
 

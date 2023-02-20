@@ -39,6 +39,7 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
         Route::get('cart',[AjaxController::class,'addToCart'])->name('ajax@addToCart');
 
         Route::get('order',[AjaxController::class,'order'])->name('ajax@order');
+        Route::get('each/remove',[AjaxController::class,'eachRemove'])->name('ajax@eachRemove');
         Route::get('clearCart', [AjaxController::class,'clearCart'])->name('ajax@clearCart');
     });
 

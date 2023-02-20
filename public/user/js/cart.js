@@ -16,9 +16,18 @@ $(document).ready(() => {
     });
 
 
-    // Remove
+    // Remove Each One
     $('.removeBtn').click(function () {
         $parentNode = $(this).parents('tr');
+
+        $id = $parentNode.find('#card_id').val();
+        console.log($id);
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:8000/ajax/each/remove',
+            data: { 'id': $id },
+            dataType: 'json',
+        })
         $parentNode.remove();
         // $total Summary
         $subTotal = 0;
