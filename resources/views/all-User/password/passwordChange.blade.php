@@ -1,5 +1,5 @@
 @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super')
-    @extends('all-User.adminM')
+    @extends('all-User.password.adminM')
 @endif
 
 @section('title', 'Password Change')

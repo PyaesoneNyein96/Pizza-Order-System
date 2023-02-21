@@ -181,7 +181,6 @@
                         },
                         dataType: 'json',
                         success: (res) => {
-                            // console.log(res)
                             $list = '';
                             for ($i = 0; $i < res.length; $i++) {
                                 $list += `

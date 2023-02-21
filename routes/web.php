@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\AjaxController;
@@ -13,12 +14,7 @@ use App\Http\Controllers\User\UserController;
 
 
 
-// ======ADMIN +++
-
-
 Route::redirect('/', 'auth/home');
-
-
 
 // ======== LOGIN - REGISTER +++++++
 Route::prefix('auth')->middleware('basicAuth')->group(function () {
@@ -90,7 +86,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('suspend/{id}', [AdminController::class,'suspend'])->name('admin@suspend');
             Route::get('allows/{id}', [AdminController::class,'allows'])->name('admin@allows');
         });
-    }); // Admin middleware End here!--
+
+        //Admin Order
+        Route::prefix('order')->group(function () {
+            Route::get('List',[OrderController::class,'orderList'])->name('admin@orderList');
+            Route::get('ajax/status',[OrderController::class,'switchStatus'])->name('admin@switchStatus');
+        });
+
+    }); // Admin middleware and admin Prefix End here!--
 
 
         // =====USER=====

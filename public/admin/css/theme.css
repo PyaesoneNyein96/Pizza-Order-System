@@ -64,7 +64,7 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 }
 
 .brand-font {
-    font-family: "Rubik Gemstones", cursive;
+    /* font-family: "Rubik Gemstones", cursive; */
 }
 
 .text-orange {
@@ -1311,7 +1311,6 @@ section {
         top: 0;
         left: 0;
         height: 170px;
-
     }
 }
 

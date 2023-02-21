@@ -53,8 +53,12 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#" class="text-decoration-none d-flex align-items-center ">
-                    <img src="{{ asset('admin/images/icon/pizza.png') }}" style="width: 30px"; alt="Cool Admin" />
-                    <span class="h3 brand-font text-danger mt-2"> Pizza Galaxy</span>
+                    <img src="{{ asset('admin/images/logo-icon/online-shopping.png') }}"
+                        style="width: 50px; --fa-animation-duration: 3.1s;" alt="Cool Admin" class="fa-shake" />
+                    <span class="h4 brand-font text-warning  mt-2 d-none d-md-inline">
+                        Galaxy <span class="text-green">Shop</span>.i<i
+                            class="fa-solid fa-circle-notch fa-spin fa-2xs"></i>
+                    </span>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -81,8 +85,15 @@
                         <li>
                             <a href="{{ route('admin@productList') }}"
                                 class="text-decoration-none @if (url()->current() == route('admin@productList')) text-danger @endif">
-                                <i class="fa-solid fa-pizza-slice"></i>
+                                <i class="fa-solid fa-box-open"></i>
                                 Product
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin@orderList') }}"
+                                class="text-decoration-none @if (url()->current() == route('admin@orderList')) text-danger @endif">
+                                <i class="fa-regular fa-newspaper"></i>
+                                Orders
                             </a>
                         </li>
 
@@ -271,6 +282,9 @@
     <script src="{{ asset('admin/js/main.js') }}"></script>
 
 </body>
+
+@yield('script')
+
 
 </html>
 <!-- end document-->
