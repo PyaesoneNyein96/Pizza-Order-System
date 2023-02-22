@@ -59,7 +59,8 @@ class AdminController extends Controller
             ->orWhere('gender','like', "%$key%")
             ->orWhere('address','like', "%$key%")
             ->orWhere('role','like', "%$key%");
-        })->where('role','admin')->orWhere('role','super')
+        })->where('role','admin')
+        // ->orWhere('role','super')
         ->orderBy('created_at', 'desc')->paginate(10);
 
        $users->appends(request()->all());
