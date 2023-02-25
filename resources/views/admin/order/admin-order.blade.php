@@ -126,7 +126,7 @@
                                         <th> Total Amount</th>
                                         <th> Status</th>
                                         <th> Date</th>
-                                        <th> Detail</th>
+
 
 
                                     </tr>
@@ -142,8 +142,14 @@
                                             <td>
                                                 <span>{{ $order->user_name }}</span>
                                             </td>
-                                            <td>
-                                                <span>{{ $order->order_code }}</span>
+
+                                            <td title="click to View Detail">
+                                                <a href="{{ route('admin@orderDetail', ['code' => $order->order_code]) }}"
+                                                    class="text-decoration-none O_code">
+                                                    <span class="d-flex align-items-center">
+                                                        {{ $order->order_code }}
+                                                    </span>
+                                                </a>
                                             </td>
 
                                             <td>
@@ -172,11 +178,7 @@
                                                 <span> {{ $order->created_at->format('j - M -Y') }} </span>
 
                                             </td>
-                                            <td class="text-end">
-                                                <a href="">
-                                                    <i class="fa-solid fa-circle-info fa-2xl text-primary "></i>
-                                                </a>
-                                            </td>
+
                                         </tr>
                                         <tr class="spacer"></tr>
                                     @endforeach

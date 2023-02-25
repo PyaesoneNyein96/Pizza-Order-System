@@ -48,6 +48,17 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 
+.order-detail-img {
+    width: 100px !important;
+    height: 70px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease-in-out !important;
+    object-fit: contain !important;
+}
+.order-detail-img:hover {
+    transform: scale(2.3) !important;
+}
+
 .bg-dark-custom {
     background-color: #3d464d !important;
 }

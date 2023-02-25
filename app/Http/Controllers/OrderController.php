@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\OrderOperation;
 
 class OrderController extends Controller
 {
@@ -39,12 +40,36 @@ class OrderController extends Controller
      }
 
         // Change Each Order status
-        public function statusChange(){
+    public function statusChange(){
             logger(request()->all());
             Order::where('id', request()->id)->update([
                 'status' => request()->status,
             ]);
-        }
+    }
+
+
+
+    // Order Detail
+    public function orderDetail(Request $req){
+
+        // dd($req->code);
+
+        // Order_operation & User & Product JOIN . . .
+        $total = Order::select('total_price')->where('order_code',request()->code)->first();
+
+        $info = OrderOperation::select('order_operations.*', 'products.name as product_name',
+        'products.image as product_image', 'users.name as user_name','users.image as user_image'
+         ,'users.gender as user_gender','users.phone as phone')
+        ->leftJoin('products', 'order_operations.product_id', 'products.id')
+        ->leftJoin('users', 'users.id', 'order_operations.user_id')
+        ->where('order_code', request()->code)->get();
+
+        $user = $info[0];
+        // dd($total->toArray());
+
+
+        return view('admin.order.order-detail-info', compact('info', 'user', 'total'));
+    }
 
 
 
