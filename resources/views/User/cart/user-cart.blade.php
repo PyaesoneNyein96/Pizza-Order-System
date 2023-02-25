@@ -39,7 +39,7 @@
 
                                 {{-- Hidden Value  --}}
 
-                                <td class="align-middle text-success" id="dbPrice">{{ $cart->productPrice }}Kyats
+                                <td class="align-middle text-success" id="dbPrice">{{ $cart->productPrice }}$
                                 </td>
 
                                 <td class="align-middle">
@@ -68,7 +68,7 @@
                                 </td>
 
 
-                                <td class="align-middle" id='total'>{{ $cart->productPrice * $cart->quantity }} Kyats
+                                <td class="align-middle" id='total'>{{ $cart->productPrice * $cart->quantity }} $
                                 </td>
 
 
@@ -102,7 +102,7 @@
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Subtotal</h6>
-                                <h6 id='subtotal'class="text-success"> {{ $total }} Kyats</h6>
+                                <h6 id='subtotal'class="text-success"> {{ $total }} $</h6>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
@@ -112,7 +112,7 @@
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5 class="text-success" id='final'>{{ $total != 0 ? $total + 100 : $total }} Kyats
+                                <h5 class="text-success" id='final'>{{ $total != 0 ? $total + 100 : $total }} $
                                 </h5>
                             </div>
                             <button id="orderBtn" class="btn btn-block btn-outline-primary font-weight-bold my-3 py-3">

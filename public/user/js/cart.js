@@ -40,19 +40,19 @@ $(document).ready(() => {
         $('#cartTable tr').each(function (i, row) {
             $subTotal += Number($(row).find('#hide').val());
         })
-        $('#subtotal').html(`${$subTotal} Kyats`);
+        $('#subtotal').html(`${$subTotal} $`);
         if ($subTotal == 0) {
-            $('#final').html(`${$subTotal} Kyats`);
+            $('#final').html(`${$subTotal} $`);
         } else {
-            $('#final').html(`${$subTotal + 100} Kyats`);
+            $('#final').html(`${$subTotal + 100} $`);
         }
     }
 
     function calculation() {
         $Qty = parseInt($parentNode.find('#quantity').val());
-        $price = Number($parentNode.find('#dbPrice').html().replace('Kyats', ''));
+        $price = Number($parentNode.find('#dbPrice').html().replace('$', ''));
         $total = $Qty * $price;
-        $parentNode.find('#total').html($total + ' ' + 'Kyats');
+        $parentNode.find('#total').html($total + ' ' + '$');
         $parentNode.find('#hide').val($total);
     }
 

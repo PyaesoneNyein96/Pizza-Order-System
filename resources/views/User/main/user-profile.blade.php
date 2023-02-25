@@ -18,16 +18,18 @@
                             <div class="wrap  text-center">
                                 <div class="img-wrap m-3 ">
                                     @if (Auth::user()->image == null && Auth::user()->gender == 'male')
-                                        <img src="{{ asset('image/avators/images.jpg') }}" id="profile" class="shadow" />
+                                        <img src="{{ asset('image/avators/images.jpg') }}" id="profile" class="shadow"
+                                            style="max-width:300px; object-fit:cover" />
                                     @elseif (Auth::user()->image == null && Auth::user()->gender == 'female')
-                                        <img src="{{ asset('image/avators/female.jpg') }}" id="profile" class="shadow" />
+                                        <img src="{{ asset('image/avators/female.jpg') }}" id="profile" class="shadow"
+                                            style="max-width:300px; object-fit:cover" />
                                     @elseif(Auth::user()->image == null)
                                         <img src="{{ asset('image/avators/genderless.jpg') }}" id="profile"
-                                            class="shadow">
+                                            style="max-width:300px; object-fit:cover" class="shadow">
                                     @endif
                                     @if (Auth::user()->image !== null)
                                         <img src="{{ asset('storage/' . Auth::user()->image) }}" id='profile'
-                                            class="shadow">
+                                            class="shadow" style="max-width:300px; object-fit:cover">
                                     @endif
                                     {{-- ========== --}}
                                 </div>
