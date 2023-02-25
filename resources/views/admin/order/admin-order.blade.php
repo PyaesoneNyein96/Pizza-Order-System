@@ -222,7 +222,7 @@
                 }
                 $.ajax({
                     type: 'get',
-                    url: 'http://localhost:8000/admin/order/ajax/status/change',
+                    url: '/admin/order/ajax/status/change',
                     data: $data,
                     dataType: 'json',
                 })

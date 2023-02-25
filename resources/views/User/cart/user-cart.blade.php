@@ -155,13 +155,13 @@
             // console.log($orderList);
             $.ajax({
                 type: 'get',
-                url: 'http://localhost:8000/ajax/order',
+                url: '/ajax/order',
                 data: Object.assign({}, $orderList),
                 dataType: 'json',
                 success: function(res) {
                     console.log(res.status);
                     if (res.status == true) {
-                        window.location.href = 'http://localhost:8000/user/home'
+                        window.location.href = '/user/home'
                     }
                 }
             })
@@ -174,7 +174,7 @@
             // Ajax
             $.ajax({
                 type: 'get',
-                url: 'http://localhost:8000/ajax/clearCart',
+                url: '/ajax/clearCart',
                 dataType: 'json',
             });
 

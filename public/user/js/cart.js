@@ -24,7 +24,7 @@ $(document).ready(() => {
         console.log($id);
         $.ajax({
             type: 'get',
-            url: 'http://localhost:8000/ajax/each/remove',
+            url: '/ajax/each/remove',
             data: { 'id': $id },
             dataType: 'json',
         })

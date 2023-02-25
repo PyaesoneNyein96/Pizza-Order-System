@@ -320,7 +320,7 @@
 
         $.ajax({
             type: 'get',
-            url: 'http://localhost:8000/ajax/view/count',
+            url: '/ajax/view/count',
             data: {
                 'pizzaID': $('#pizzaID').val()
             },
@@ -341,13 +341,13 @@
 
             $.ajax({
                 type: 'get',
-                url: 'http://localhost:8000/ajax/cart',
+                url: '/ajax/cart',
                 data: $info,
                 dataType: 'json',
                 success: (res) => {
                     console.log('ss')
                     if (res.status == 'success') {
-                        window.location.href = 'http://localhost:8000/user/home';
+                        window.location.href = '/user/home';
                     }
                 }
             })

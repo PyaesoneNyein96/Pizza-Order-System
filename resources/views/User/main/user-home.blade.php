@@ -193,7 +193,7 @@
             if ($eventOption == 'asc') {
                 $.ajax({
                     type: 'get',
-                    url: 'http://localhost:8000/ajax/products/list',
+                    url: '/ajax/products/list',
                     data: {
                         'status': 'asc'
                     },
@@ -249,7 +249,7 @@
             } else if ($eventOption == 'des') {
                 $.ajax({
                     type: 'get',
-                    url: 'http://localhost:8000/ajax/products/list',
+                    url: '/ajax/products/list',
                     data: {
                         'status': 'des'
                     },
