@@ -1222,7 +1222,7 @@ section {
     background-color: transparent;
 }
 
-.au-checkbox input:checked ~ .au-checkmark {
+.au-checkbox input:checked ~ .au-checkmate {
     background-color: transparent;
 }
 
