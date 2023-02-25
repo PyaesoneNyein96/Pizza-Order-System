@@ -92,7 +92,10 @@ Route::middleware(['auth'])->group(function () {
         //Admin Order
         Route::prefix('order')->group(function () {
             Route::get('List',[OrderController::class,'orderList'])->name('admin@orderList');
-            Route::get('ajax/status',[OrderController::class,'switchStatus'])->name('admin@switchStatus');
+            // Route::get('ajax/status',[OrderController::class,'switchStatus'])->name('admin@switchStatus');
+
+            Route::get('switch/status',[OrderController::class,'switchStatus'])->name('admin@switchStatus');
+            Route::get('ajax/status/change',[OrderController::class,'statusChange','admin@singleChange']);
         });
 
     }); // Admin middleware and admin Prefix End here!--

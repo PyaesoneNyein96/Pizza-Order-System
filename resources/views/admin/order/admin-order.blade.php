@@ -19,11 +19,7 @@
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            {{-- <a href="{{ route('admin@createProductPage') }}">
-                                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i>add Product
-                                </button>
-                            </a> --}}
+
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 CSV download
                             </button>
@@ -47,12 +43,27 @@
                             </div>
 
                             <div class="col-md-2">
-                                <select id="orderStatus" class="form-select form-select-sm shadow-none">
-                                    <option value="0">Pending</option>
-                                    <option value="1">Confirm</option>
-                                    <option value="2">Reject</option>
-                                    <option value="all" selected>All</option>
-                                </select>
+
+                                <div class="dropdown">
+                                    <button class="btn btn-light shadow-sm text-secondary dropdown-toggle btn-sm"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ request()->status == 'all' ? 'All Status' : '' }}
+                                        {{ request()->status == 0 ? 'Pending' : '' }}
+                                        {{ request()->status == 1 ? 'Confirm' : '' }}
+                                        {{ request()->status == 2 ? 'Reject' : '' }}
+
+                                    </button>
+                                    <ul class="dropdown-menu sort-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin@switchStatus', ['status' => 'all']) }}">All</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin@switchStatus', ['status' => 0]) }}">Pending</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin@switchStatus', ['status' => 1]) }}">Confirm</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin@switchStatus', ['status' => 2]) }}">Reject</a></li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="col-md-5 col-6 searching">
@@ -125,10 +136,8 @@
                                         <tr class="tr-shadow" title="{{ $order->name }}">
 
                                             <td>{{ $loop->iteration }}</td>
-                                            {{-- <td>{{ $loop->index + $orders->firstItem() }}</td> --}}
-                                            {{-- <td>{{ $loop->iteration + $orders->firstItem() }}</td> --}}
 
-                                            <input type="hidden" id="order_id" value="{{ $order->id }}">
+                                            <input type="hidden" class="order_id" value="{{ $order->id }}">
 
                                             <td>
                                                 <span>{{ $order->user_name }}</span>
@@ -141,7 +150,7 @@
                                                 <span class="text-success"> {{ $order->total_price }} .00$</span>
                                             </td>
                                             <td>
-                                                <select class="form-select form-select-sm shadow-none" id="statusChange">
+                                                <select class="form-select form-select-sm shadow-none statusChange">
 
                                                     <option value="0" class="text-primary"
                                                         @selected($order->status == 0)>
@@ -198,85 +207,23 @@
     <script>
         $(document).ready(function() {
 
-            $('#orderStatus').change(function() {
-                $status = $('#orderStatus').val();
-
-                $.ajax({
-                    type: 'get',
-                    url: 'http://localhost:8000/admin/order/ajax/status',
-                    data: {
-                        'status': $status
-                    },
-                    dataType: 'json',
-                    success: (res) => {
-                        $list = '';
-                        for ($i = 0; $i < res.length; $i++) {
-
-                            $months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July',
-                                'Aug', 'Spet', 'Oct', 'Nov', 'Dec'
-                            ];
-                            $dbDate = new Date(res[$i].created_at);
-                            $finalDate = $months[$dbDate.getMonth()] + '-' + $dbDate.getDate() +
-                                '-' + $dbDate.getFullYear();
-
-                            $list +=
-                                `
-                                <tr class="tr-shadow">
-                                    <td> ${$i +1 } </td>
-                                    <td>
-                                        <span> ${res[$i] . user_name} </span>
-                                    </td>
-                                    <td>
-                                        <span>${res[$i].order_code}</span>
-                                    </td>
-
-                                    <td>
-                                        <span class="text-success"> ${res[$i].total_price} .00$</span>
-                                    </td>
-                                    <td>
-                                        <select name="status" class="form-select form-select-sm shadow-none">
-
-                                            <option value="0" class="text-primary" ${res[$i].status == 0 ? 'selected' : '' } >
-                                                pending
-                                            </option>
-
-                                            <option value="1" class="text-success"  ${res[$i].status == 1 ? 'selected' : '' } >
-                                                confirm
-                                            </option>
-
-                                            <option value="2" class="text-danger" ${res[$i].status == 2 ? 'selected' : '' }>
-                                                Reject
-                                            </option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <span> ${$finalDate}  </span>
-
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="">
-                                            <i class="fa-solid fa-circle-info fa-2xl text-secondary "></i>
-                                        </a>
-                                    </td>
-                                    </tr>
-                                    <tr class="spacer"></tr>
-                            `;
-                            $('#orderList').html($list)
-                        }
-                        // for loop end
-                    }
-                })
-                // ajax end
-
-            })
-            // filter status
-
 
             // start status Change
-            $('#statusChange').change(function() {
-                $val = $(this).val();
-                console.log($val);
+            $('.statusChange').change(function() {
+                $status = $(this).val();
+                $parent = $(this).parents('tr');
+                $val = $parent.find('.order_id').val();
+
+                $data = {
+                    'id': $val,
+                    'status': $status
+                }
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/admin/order/ajax/status/change',
+                    data: $data,
+                    dataType: 'json',
+                })
 
             })
 

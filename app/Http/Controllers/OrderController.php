@@ -26,21 +26,25 @@ class OrderController extends Controller
 
     public function switchStatus(){
 
-       $orders = Order::select('orders.*','users.name as user_name')
-       ->leftJoin('users','users.id','orders.user_id');
+        $orders = Order::select('orders.*','users.name as user_name')
+        ->leftJoin('users','users.id','orders.user_id');
 
-       if(request()->status == 'all'){
-        $orders = $orders->get();
-       }else{
-           $orders = $orders->where('orders.status', request()->status)->get();
+        if(request()->status == 'all'){
+         $orders = $orders->get();
+        }else{
+            $orders = $orders->where('orders.status', request()->status)->get();
+         }
+
+     return view('admin.order.admin-order',compact('orders'));
+     }
+
+        // Change Each Order status
+        public function statusChange(){
+            logger(request()->all());
+            Order::where('id', request()->id)->update([
+                'status' => request()->status,
+            ]);
         }
-
-    return response()->json($orders, 200);
-
-
-
-    }
-
 
 
 
