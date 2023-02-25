@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
     public function adminDashboard(){
-        return view('admin.admin-dashboard');
+        $message = Contact::select('contacts.*', 'users.image as user_image', 'users.phone as user_phone', 'users.gender as user_gender')
+        ->leftJoin('users', 'contacts.name', 'users.name')
+        ->orderBy('created_at','desc')->paginate(20);
+
+        return view('admin.admin-dashboard',compact('message'));
     }
 
     public function profile(){
