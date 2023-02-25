@@ -151,13 +151,13 @@
                                 </div>
                             @endauth
                             @guest
-                                <span>
+                                <div class="mt-3">
                                     <a href="{{ route('auth@login') }}">
                                         <button class="btn btn-outline-info  rounded btn-sm">
                                             Login or Register
                                         </button>
                                     </a>
-                                </span>
+                                </div>
                             @endguest
 
 

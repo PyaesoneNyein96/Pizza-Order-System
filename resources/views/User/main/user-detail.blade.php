@@ -61,9 +61,7 @@
                         @endfor
 
 
-                        @if ($item->view_count == 0)
-                            <small class="far fa-star"></small>
-                        @endif
+
 
 
                     </div>
