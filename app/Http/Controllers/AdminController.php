@@ -55,7 +55,9 @@ class AdminController extends Controller
     // xxxxxxxxxxxxxxxx
 
 
-    public function list(){
+    public function list(Request $req){
+
+        // dd($req->status);
         $users = User::when(request('searchValue'), function ($query){
             $key = request('searchValue');
             $query->orWhere('name','like',"%$key%")
@@ -64,11 +66,20 @@ class AdminController extends Controller
             ->orWhere('gender','like', "%$key%")
             ->orWhere('address','like', "%$key%")
             ->orWhere('role','like', "%$key%");
-        })->where('role','admin')
-        // ->orWhere('role','super')
-        ->orderBy('created_at', 'desc')->paginate(10);
+        });
 
-       $users->appends(request()->all());
+
+        if($req->status == 'user'){
+            $users = $users->where('role','user')
+            ->orderBy('created_at', 'desc')->paginate(10);
+        }else{
+            $users = $users->where('role','admin')
+            ->orderBy('created_at', 'desc')->paginate(10);
+        }
+
+
+
+        $users->appends(request()->all());
         return view('admin.manageAdmin.admin_list',compact('users'));
     }
 

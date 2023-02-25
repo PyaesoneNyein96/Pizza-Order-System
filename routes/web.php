@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}',[ CategoryController::class,'deleteCategory'])->name('admin@DeleteCategory');
             Route::get('editPage/{id}',[CategoryController::class,'editPage'])->name('admin@EditCategory');
             Route::post('update/{id}',[CategoryController::class,'updateCategory'])->name('admin@UpdateCategory');
+
+
         });
 
         // ADMIN PRODUCT
@@ -88,6 +90,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('promote/{id}', [AdminController::class,'promote'])->name('admin@promote');
             Route::get('suspend/{id}', [AdminController::class,'suspend'])->name('admin@suspend');
             Route::get('allows/{id}', [AdminController::class,'allows'])->name('admin@allows');
+
+            // Route::get('userFilter',[AdminController::class,'list'])->name('admin@userFilter');
         });
 
         //Admin Order

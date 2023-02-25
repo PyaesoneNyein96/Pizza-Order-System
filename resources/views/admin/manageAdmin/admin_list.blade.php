@@ -16,13 +16,8 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="d-inline title-1">Users</h2>
-                                <a href="" class="mx-2">
-                                    <button class="btn btn-outline-success">All User</button>
-                                </a>
-                                <a href="" class="mx-2">
-                                    <button class="btn btn-outline-danger">Admins</button>
-                                </a>
+                                <h2 class="d-inline title-1">Users Management</h2>
+
 
                             </div>
                         </div>
@@ -41,9 +36,9 @@
 
 
                     <div class="table-responsive table-responsive-data2 text-center">
-                        <div class="d-flex row justify-content-between ">
-                            <div class="col-md-5 col-6 total text-start">
-                                Total Category : <span class="badge badge-pill px-2 rounded-circle h5 bg-info">
+                        <div class="d-flex row justify-content-between align-items-center">
+                            <div class="col-md-4 col-6 total text-start">
+                                Total Users : <span class="badge badge-pill px-2 rounded-circle h5 bg-info">
                                     {{ $users->total() }}
                                 </span>
                                 <div> Search Key :
@@ -51,6 +46,23 @@
                                         {{ request('searchValue') }}
                                     </span>
                                 </div>
+                            </div>
+                            <div class="col-md-3 d-flex">
+                                @if (request()->status != 'user')
+                                    <a href="{{ route('admin@adminList', ['status' => 'user']) }}" class="mx-1">
+                                        <button class="btn btn-outline-success btn-sm">Users</button>
+                                    </a>
+                                @else
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>Users</button>
+                                @endif
+
+                                @if (request()->status == 'user')
+                                    <a href="{{ route('admin@adminList') }}" class="mx-1">
+                                        <button class="btn btn-outline-danger btn-sm">Admins</button>
+                                    </a>
+                                @else
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>Admins</button>
+                                @endif
                             </div>
 
                             <div class="col-md-5 col-6 searching">
