@@ -84,7 +84,13 @@ class AjaxController extends Controller
         Cart::where('id',request()->id)->where('user_id', Auth::id())->delete();
     }
 
+    public function increaseViewCount(){
+        $dbView =  Product::select('view_count')->where('id',request()->pizzaID)->first();
+        $increaseNum = ['view_count' => $dbView->view_count + 1 ];
 
+        Product::where('id', request()->pizzaID)->update($increaseNum);
+
+      }
 
 
 

@@ -144,46 +144,64 @@
                                             </h6>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                        </div>
+                                            @if ($item->view_count == 0)
+                                                <small class="far fa-star"></small>
+                                            @endif
+
+                                            @if ($item->view_count >= 20)
+                                                <small class="fas fa-star text-warning"></small>
+                                                <small class="fas fa-star text-warning"></small>
+                                                <small class="fas fa-star text-warning"></small>
+                                                <small class="fas fa-star text-warning"></small>
+                                                <small class="fas fa-star text-warning"></small>
+                                            @endif
+
+                                            @for ($i = 0; $i < $item->view_count / 4; $i++)
+                                                @if ($item->view_count >= 20)
+                                                @break
+                                            @endif
+                                            <small class="fas fa-star text-warning"></small>
+                                        @endfor
+
+
+                                        @if ($item->view_count == 0)
+                                            <small class="far fa-star"></small>
+                                        @endif
                                     </div>
                                 </div>
-
                             </div>
-                        @endforeach
-                    </div>
 
+                        </div>
+                    @endforeach
                 </div>
+
             </div>
-            <!-- Shop Product End -->
         </div>
+        <!-- Shop Product End -->
     </div>
-    <!-- Shop End -->
+</div>
+<!-- Shop End -->
 
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(() => {
+<script>
+    $(document).ready(() => {
 
-            $('#sortingOption').change(() => {
-                $eventOption = $('#sortingOption').val();
-                if ($eventOption == 'asc') {
-                    $.ajax({
-                        type: 'get',
-                        url: 'http://localhost:8000/ajax/products/list',
-                        data: {
-                            'status': 'asc'
-                        },
-                        dataType: 'json',
-                        success: (res) => {
-                            $list = '';
-                            for ($i = 0; $i < res.length; $i++) {
-                                $list += `
+        $('#sortingOption').change(() => {
+            $eventOption = $('#sortingOption').val();
+            if ($eventOption == 'asc') {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/ajax/products/list',
+                    data: {
+                        'status': 'asc'
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        $list = '';
+                        for ($i = 0; $i < res.length; $i++) {
+                            $list += `
                                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                         <div class="product-item bg-light mb-4" id="ajaxData">
                                             <div class="product-img position-relative overflow-hidden">
@@ -223,23 +241,23 @@
                                         </div>
                                 </div>
                                `;
-                                $('#dataList').html($list);
-                            }
+                            $('#dataList').html($list);
                         }
-                    })
+                    }
+                })
 
-                } else if ($eventOption == 'des') {
-                    $.ajax({
-                        type: 'get',
-                        url: 'http://localhost:8000/ajax/products/list',
-                        data: {
-                            'status': 'des'
-                        },
-                        dataType: 'json',
-                        success: (res) => {
-                            $list = '';
-                            for ($i = 0; $i < res.length; $i++) {
-                                $list += `
+            } else if ($eventOption == 'des') {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/ajax/products/list',
+                    data: {
+                        'status': 'des'
+                    },
+                    dataType: 'json',
+                    success: (res) => {
+                        $list = '';
+                        for ($i = 0; $i < res.length; $i++) {
+                            $list += `
                                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                         <div class="product-item bg-light mb-4" id="ajaxData">
                                             <div class="product-img position-relative overflow-hidden">
@@ -278,16 +296,16 @@
                                         </div>
                                 </div>
                                `;
-                                $('#dataList').html($list);
-                            }
+                            $('#dataList').html($list);
                         }
-                    })
-                }
-
-            })
-
-
+                    }
+                })
+            }
 
         })
-    </script>
+
+
+
+    })
+</script>
 @endsection
