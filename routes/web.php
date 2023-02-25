@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\AjaxController;
@@ -107,6 +108,9 @@ Route::middleware(['auth'])->group(function () {
         // USER HOME
         Route::get('/home',[UserController::class,'home'])->name('user@home');
         Route::get('pizza/detail/{id}',[UserController::class,'detail'])->name('user@detail');
+
+        Route::get('contact', [ContactController::class,'contact'])->name('user@contact');
+        Route::post('message',[ContactController::class,'message'])->name('user@message');
 
         // USER PROFILE
         Route::get('/profile',[UserController::class,'profile'])->name('user@profile');

@@ -69,16 +69,23 @@
                             @auth
                                 <a href="{{ route('user@home') }}"
                                     class="nav-item nav-link @if (url()->current() == route('user@home')) active @endif">Home</a>
-                            @endauth
-                            @guest
-                                <a href="" class="nav-item nav-link active">Home</a>
-                            @endguest
+                                <a href="{{ route('user@cartList') }}"
+                                    class="nav-item nav-link
+                                @if (url()->current() == route('user@cartList')) active @endif">
+                                    My Cart
+                                </a>
 
-                            <a href="{{ route('user@cartList') }}"
-                                class="nav-item nav-link
-                            @if (url()->current() == route('user@cartList')) active @endif">
-                                My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+
+                                <a href="{{ route('user@contact') }}"
+                                    class="nav-item nav-link @if (url()->current() == route('user@contact')) active @endif">
+                                    Contact
+                                </a>
+                            @endauth
+                            {{-- @guest
+                                <a href="" class="nav-item nav-link active">Home</a>
+                            @endguest --}}
+
+
                         </div>
 
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
