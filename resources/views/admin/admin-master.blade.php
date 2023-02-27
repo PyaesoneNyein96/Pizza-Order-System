@@ -67,7 +67,7 @@
                         <li>
                             <a href="{{ route('admin@dashboard') }}"
                                 class="text-decoration-none @if (url()->current() == route('admin@dashboard')) text-danger @endif">
-                                <i class="fa-solid fa-laptop-file"></i> Dashboard</a>
+                                <i class="fa-solid fa-laptop-file"></i> Dashboard </a>
                         </li>
                         <li>
                             <a href="{{ route('admin@adminList') }}"
@@ -94,6 +94,13 @@
                                 class="text-decoration-none @if (url()->current() == route('admin@orderList')) text-danger @endif">
                                 <i class="fa-regular fa-newspaper"></i>
                                 Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin@messageList') }}"
+                                class="text-decoration-none @if (url()->current() == route('admin@messageList')) text-danger @endif">
+                                <i class="fa-solid fa-message"></i>
+                                Contact
                             </a>
                         </li>
 

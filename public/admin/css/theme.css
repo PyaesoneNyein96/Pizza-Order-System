@@ -47,7 +47,10 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
+.text-show {
+    max-height: 700px !important;
+    overflow: auto !important;
+}
 .order-detail-img {
     width: 100px !important;
     height: 70px !important;

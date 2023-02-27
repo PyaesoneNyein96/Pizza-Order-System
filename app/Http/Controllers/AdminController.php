@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
     public function adminDashboard(){
-        $message = Contact::select('contacts.*', 'users.image as user_image', 'users.phone as user_phone', 'users.gender as user_gender')
-        ->leftJoin('users', 'contacts.name', 'users.name')
-        ->orderBy('created_at','desc')->paginate(20);
 
-        return view('admin.admin-dashboard',compact('message'));
+        return view('admin.admin-dashboard');
     }
 
     public function profile(){

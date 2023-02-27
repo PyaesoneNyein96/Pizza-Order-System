@@ -103,6 +103,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('detail',[OrderController::class,'orderDetail'])->name('admin@orderDetail');
         });
 
+        // Contact
+        Route::prefix('contact')->group(function () {
+            Route::get('message/list',[ContactController::class,'messageList'])->name('admin@messageList');
+        });
+
     }); // Admin middleware and admin Prefix End here!--
 
 
