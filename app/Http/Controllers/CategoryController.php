@@ -78,9 +78,10 @@ class CategoryController extends Controller
     }
 
 
-// &&&&&&&&&&&&&&&
-            // Validation and Data Collect <><><><><><><><><>
-// &&&&&&&&&&&&&&&
+// =================
+//         Validation and Data Collect <><><><><><><><><>
+// =================
+
     private function createValidateCategory($req){
         Validator::make($req->all(),
         [ 'categoryName' => 'required|unique:categories,name'],

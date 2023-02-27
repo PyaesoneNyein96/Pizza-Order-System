@@ -20,7 +20,7 @@
                             <div class="col-md-6  text-start">
                                 <h5 class="text-muted m-3">Current Image</h5>
                                 <img src="{{ asset('storage/product/' . $item->image) }}" class="img-thumbnail"
-                                    style="width:300px; height:200px; object-fit: cover;">
+                                    style="width:300px; height:200px; object-fit: contain;">
                             </div>
                             <div class="col-md-6
                                     text-end ">

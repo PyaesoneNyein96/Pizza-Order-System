@@ -190,9 +190,16 @@
 
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
-                                                <a href="{{ route('admin@profile') }}">
-                                                    <i class="zmdi zmdi-account"></i>Account
-                                                </a>
+                                                @if (Gate::allows('admin/super-auth', Auth::user()))
+                                                    <a href="{{ route('admin@profile') }}">
+                                                        <i class="zmdi zmdi-account"></i>Account
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('user@profile') }}">
+                                                        <i class="zmdi zmdi-account"></i>Account
+                                                    </a>
+                                                @endif
+
                                             </div>
                                             @if (url()->current() != route('auth@changePage'))
                                                 <div class="account-dropdown__item">

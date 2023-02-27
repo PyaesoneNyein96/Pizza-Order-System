@@ -24,35 +24,19 @@
                                 class="custom-control custom-checkbox d-flex align-items-center
                                 rounded justify-content-between mb-3 bg-dark-custom text-light pt-2 px-3">
                                 {{-- <input type="checkbox" class="custom-control-input" checked id="price-all"> --}}
-                                <label class="" for="price-all">All
+                                <label class="" for="price-all">
                                     @if ($status == 'all')
-                                        Products
+                                        All Products and Categories
                                     @else
                                         Categories
                                     @endif
                                 </label>
 
                                 <span class="badge border font-weight-normal mb-2 text-light">
-                                    {{ $status ? count($categories) : count($categories) }}
+                                    {{ $status ? count($products) : count($categories) }}
                                 </span>
-
                             </div>
 
-                            @foreach ($categories as $category)
-                                <div class="custom-control custom-checkbox  py-1 text-dark mb-3">
-                                    <a href="{{ route('user@filter', $category->id) }}"
-                                        class="text-decoration-none w-100 d-block"
-                                        onclick="document.getElementById({{ $category->id }}).checked=true"
-                                        class="p-1 text-decoration-none text-dark">
-                                        <input type="checkbox" id="{{ $category->id }}" class="custom-control-input"
-                                            @if ($status == $category->id) checked @endif>
-                                        <label class="custom-control-label w-100">
-                                            {{ $category->name }}
-                                        </label>
-
-                                    </a>
-                                </div>
-                            @endforeach
                             <div class="custom-control custom-checkbox  py-1 text-dark mb-3">
                                 <a href="{{ route(Auth::check() ? 'user@home' : 'home') }}"
                                     class="text-decoration-none w-100 d-block"
@@ -67,10 +51,27 @@
                                 </a>
                             </div>
 
+                            @foreach ($categories as $category)
+                                <div class="custom-control custom-checkbox  py-1 text-dark mb-2">
+                                    <a href="{{ route('user@filter', $category->id) }}"
+                                        class="text-decoration-none w-100 d-block"
+                                        onclick="document.getElementById({{ $category->id }}).checked=true"
+                                        class="p-1 text-decoration-none text-dark">
+                                        <input type="checkbox" id="{{ $category->id }}" class="custom-control-input"
+                                            @if ($status == $category->id) checked @endif>
+                                        <label class="custom-control-label w-100">
+                                            {{ $category->name }}
+                                        </label>
+
+                                    </a>
+                                </div>
+                            @endforeach
+
+
                         </form>
                     </div>
                     <!-- Price End -->
-                    <button class="btn btn btn-warning w-100">Order</button>
+
                 </div>
 
 
@@ -164,9 +165,7 @@
                                         @endfor
 
 
-                                        @if ($item->view_count == 0)
-                                            <small class="far fa-star"></small>
-                                        @endif
+
                                     </div>
                                 </div>
                             </div>

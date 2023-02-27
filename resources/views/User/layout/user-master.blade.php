@@ -81,9 +81,6 @@
                                     Contact
                                 </a>
                             @endauth
-                            {{-- @guest
-                                <a href="" class="nav-item nav-link active">Home</a>
-                            @endguest --}}
 
 
                         </div>

@@ -161,7 +161,7 @@
 
                                 @if (Auth::user()->created_at == Auth::user()->updated_at)
                                     <i class="far fa-clock fa-lg me-3 text-success"></i>
-                                    <input class="form-control  d-inline" type="text"
+                                    <input class="form-control w-90 d-inline" type="text"
                                         value="{{ auth::user()->created_at->format('j - M - Y') }}Created time "
                                         @disabled($switch)>
                                 @else
