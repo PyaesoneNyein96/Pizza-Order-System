@@ -48,7 +48,7 @@ Route::prefix('auth')->middleware('basicAuth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-// ===== ADMIN =====
+    // ===== ADMIN =====
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
         // ADMIN DASHBOARD
         Route::get('/dashboard',[AdminController::class,'adminDashboard'])->name('admin@dashboard');
@@ -91,7 +91,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('suspend/{id}', [AdminController::class,'suspend'])->name('admin@suspend');
             Route::get('allows/{id}', [AdminController::class,'allows'])->name('admin@allows');
 
-            // Route::get('userFilter',[AdminController::class,'list'])->name('admin@userFilter');
         });
 
         //Admin Order
@@ -130,7 +129,5 @@ Route::middleware(['auth'])->group(function () {
         });
 
 
-
     });
-
 });
