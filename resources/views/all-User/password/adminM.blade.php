@@ -80,12 +80,13 @@
                                     class="nav-item me-3 nav-link @if (url()->current() == route('user@home')) active @endif">
                                     Home</a>
 
-                                <a href="contact.html" class="nav-item nav-link me-3">Contact</a>
+
 
                                 <a href="{{ route('user@cartList') }}"
                                     class="nav-item nav-link me-3
                                 @if (url()->current() == route('user@cartList')) active @endif">
                                     My Cart</a>
+                                <a href="contact.html" class="nav-item nav-link me-3">Contact</a>
                             @endif
 
 

@@ -73,7 +73,7 @@
 
                                     <div class="bg-light rounded-3 mx-4 card-body">
                                         <ul class="m-0 p-0">
-                                            <p class="text-justify text" style="max-height:100px; overflow:hidden">
+                                            <p class="text-justify text" style="max-height:150px; overflow:hidden">
                                                 {{ $sms->message }}
                                             <div class="text-end my-2">
                                                 <a href="#" class="read-btn">Read more</a>

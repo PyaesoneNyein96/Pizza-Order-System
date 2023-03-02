@@ -126,10 +126,12 @@
                                     </button>
 
                                     <ul class="dropdown-menu dropdown-menu-end ">
+
                                         <li class="my-2">
                                             <a href="{{ route('user@profile') }}" class="dropdown-item ">
                                                 <i class="fa-solid fa-user-tie me-1"> </i> Account Info</a>
                                         </li>
+
                                         <li class="my-2">
                                             <a href="{{ route('auth@changePage') }}" class="dropdown-item ">
                                                 <i class="fa-solid fa-key"></i> Change Password</a>

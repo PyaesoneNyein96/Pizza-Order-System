@@ -20,8 +20,8 @@
             <form action="{{ route('change@pass') }}" method="post">
                 @csrf
                 <div class="form-group mb-3">
-                    <h5 class="text-muted">Your email? </h5> <span class="text-success">{{ Auth::user()->email }},
-                        {{ Auth::user()->role }}</span>
+                    <h5 class="text-muted">Your email? </h5> <span class="text-success">{{ Auth::user()->email }}
+                    </span> <span class="bg-info rounded px-2 py-1 text-light">{{ Auth::user()->role }}</span>
                 </div>
                 <div class="form-group mb-3">
                     <label>Old Password</label>

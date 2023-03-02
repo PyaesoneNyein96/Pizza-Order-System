@@ -48,7 +48,7 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
     box-sizing: border-box;
 }
 .text-show {
-    max-height: 700px !important;
+    max-height: 500px !important;
     overflow: auto !important;
 }
 .order-detail-img {
@@ -3333,6 +3333,16 @@ section {
     background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
     background-image: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
     background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
+}
+.overview-item--c5 {
+    background-image: -moz-linear-gradient(90deg, #3f42a7 0%, #80825d 100%);
+    background-image: -webkit-linear-gradient(90deg, #b64592 0%, #5be39d 100%);
+    background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
+}
+.overview-item--c6 {
+    background-image: -moz-linear-gradient(90deg, #3f83a7 0%, #6b9a68 100%);
+    background-image: -webkit-linear-gradient(90deg, #7e3c6a 0%, #32473c 100%);
+    background-image: -ms-linear-gradient(90deg, #e1a676 0%, #e35b7f 100%);
 }
 
 .overview-box .icon {

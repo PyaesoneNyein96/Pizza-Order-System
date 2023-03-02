@@ -73,7 +73,7 @@ class UserController extends Controller
        $status = $id;
     //    dd($status);
        $products = Product::where('category_id', $id)->orderBy('created_at', 'desc')->get();
-       $categories = Category::get();
+       $categories = Category::orderBy('name')->get();
     //    dd($products->toArray());
         if(Auth::check()){
             return view('User.main.user-home',compact('products','categories','status'));

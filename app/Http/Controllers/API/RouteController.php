@@ -19,16 +19,16 @@ class RouteController extends Controller
 public function productList(){
     $product = Product::orderBy('created_at','desc')->get();
     $categories = Category::all();
-
-    $data = ['product'=>$product,
-             'categories' => $categories];
-
+    $data = ['product'=>$product,'categories' => $categories];
     return response()->json($data, 200);
 }
+
 public function userList(){
     $user = User::all();
     return response()->json($user, 200);
 }
+
+// CATEGORY
 
 public function categoryList(){
     $categories = Category::orderBy('created_at','desc')->get();
@@ -41,11 +41,64 @@ public function createCategory(Request $req){
              'created_at' => Carbon::now(),
              'updated_at' => Carbon::now()
             ];
-
-
     $response =  Category::create($data);
     return $response;
 }
+
+public function deleteCategory(){
+
+   $cat =  Category::where('id', request()->id)->first();
+   if(isset($cat)){
+    $cat->delete();
+        return response()->json([true,'sms'=> 'Delete Success','delData' => $cat], 200);
+    }
+        return response()->json([false,'sms'=> 'The category you want to delete is not found'], 200);
+}
+
+public function detailCategory($id){
+
+    $cat = Category::where('id', $id)->first();
+
+    if(isset($cat)){
+        return response()->json($cat, 200);
+    }
+    return response()->json(['sms'=> 'There is no category'], 200);
+
+}
+
+public function updateCategory(Request $req){
+    // return $req->name;
+    $cat = Category::where('id', $req->id)->first();
+
+    if(isset($cat)){
+     $data = $this->getData($req);
+        Category::where('id', $req->id)->update($data);
+        $newCat = Category::where('id', $req->id)->first();
+        return response()->json(['sms'=>'change'.' '.$cat->name.' '.'to'.' '.$newCat->name], 200);
+    }
+    return response()->json('err', 404);
+
+}
+
+
+
+
+
+
+// Helper Function
+
+private function getData ($req){
+        return ['name' => $req->category_name,
+                'updated_at' => Carbon::now()
+            ];
+}
+
+
+
+
+
+
+
 
 // create Contact
 

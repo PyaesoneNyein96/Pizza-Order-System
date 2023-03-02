@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Storage;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Contact;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +16,12 @@ use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
     public function adminDashboard(){
-
-        return view('admin.admin-dashboard');
+        $user = User::where('role','user')->get();
+        $product = Product::all();
+        $order = Order::all();
+        $contact = Contact::all();
+        $category = Category::all();
+        return view('admin.admin-dashboard',compact('user','product','order','contact','category'));
     }
 
     public function profile(){
