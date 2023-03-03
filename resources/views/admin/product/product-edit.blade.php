@@ -26,7 +26,7 @@
                                     text-end ">
                                 <h5 class="text-muted m-3 text-center">Preview image</h5>
                                 <div class="card-img">
-                                    <img id="output" style="width:300px; height:200px; object-fit: cover;"
+                                    <img id="output" style="width:300px; height:200px; object-fit: contain;"
                                         class="img-tumbnail shadow">
                                     <input id="img" name="productImage" type="file" accept="image/*" class="d-none"
                                         onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">

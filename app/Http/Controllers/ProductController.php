@@ -23,7 +23,6 @@ class ProductController extends Controller
             ->leftJoin('categories','products.category_id','categories.id')
             ->orderBy('products.created_at','desc')
             ->paginate(10);
-    // dd($data->toArray());
 
         return view('admin.product.product_list',compact('data'));
     }
@@ -87,7 +86,7 @@ class ProductController extends Controller
         }
 
         Product::where('id', request()->id)->update($item);
-        return redirect()->route('admin@detailProduct',request()->id)->with('success', 'Product Update Successfully');
+        return redirect()->route('admin@detailProduct',request()->id)->with('success', 'Product Updated Successfully');
 
     }
 
@@ -104,10 +103,7 @@ class ProductController extends Controller
 
 
 
-
-
-
-
+    // Validation Check
 
     private function ValidationCheck($req, $situation){
 

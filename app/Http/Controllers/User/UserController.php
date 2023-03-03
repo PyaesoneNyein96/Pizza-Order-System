@@ -18,13 +18,11 @@ class UserController extends Controller
 {
     public function home(){
         $products = Product::orderBy('created_at', 'desc')->get();
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
         $status='all';
 
         $history = Order::where('user_id', Auth::id())->get();
 
-        // $cart = Cart::where('user_id', Auth::id())->get();
-        // return view('User.main.user-home',compact('products','categories','cart','status'));
         return view('User.main.user-home',compact('products','categories','status', 'history'));
     }
 
@@ -32,7 +30,6 @@ class UserController extends Controller
     public function detail($id){
         $item = Product::find($id);
         $uMayLike = Product::where('category_id',$item->category_id)->get();
-        // $uMayLike = Product::get();
         return view('User.main.user-detail',compact('item','uMayLike'));
     }
 

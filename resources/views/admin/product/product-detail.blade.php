@@ -1,4 +1,4 @@
-@extends('admin.admin-dashboard')
+@extends('admin.admin-master')
 
 
 @section('title', 'Product Detail')

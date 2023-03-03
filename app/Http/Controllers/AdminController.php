@@ -72,7 +72,6 @@ class AdminController extends Controller
             ->orWhere('role','like', "%$key%");
         });
 
-
         if($req->status == 'user'){
             $users = $users->where('role','user')
             ->orderBy('created_at', 'desc')->paginate(10);
@@ -80,8 +79,6 @@ class AdminController extends Controller
             $users = $users->where('role','admin')
             ->orderBy('created_at', 'desc')->paginate(10);
         }
-
-
 
         $users->appends(request()->all());
         return view('admin.manageAdmin.admin_list',compact('users'));
@@ -101,14 +98,12 @@ class AdminController extends Controller
             $user->update($toAdmin);
         }
 
-        return back()->with('updateMsg', 'Demote process successfully');
+        return back()->with('updateMsg', 'successfully Demote  ');
     }
 
     // PROMOTE (+)
     public function promote($id){
         $user = User::find($id);
-        // dd($user->toArray());
-
         $toSuper = ['role' => 'super'];
         $toAdmin = ['role' => 'admin'];
 
@@ -120,7 +115,7 @@ class AdminController extends Controller
             $user->update($toAdmin);
         }
 
-        return back()->with('updateMsg', 'Promote process successfully');
+        return back()->with('updateMsg', 'successfully Promote ');
 
     }
 

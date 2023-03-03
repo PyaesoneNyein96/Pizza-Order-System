@@ -101,12 +101,9 @@
                                         <th> image</th>
                                         <th> name</th>
                                         <th> Category</th>
-                                        {{-- <th> Description</th> --}}
                                         <th> Waiting Time</th>
                                         <th> Price</th>
                                         <th> Views</th>
-
-                                        {{-- <th> date</th> --}}
                                         <th> Actions</th>
 
                                     </tr>
@@ -132,9 +129,7 @@
                                             <td>
                                                 <span>{{ $item->Category->name }}</span>
                                             </td>
-                                            {{-- <td>
-                                                <span>{{ Str::words($item->description, 10, '...etc....') }}</span>
-                                            </td> --}}
+
                                             <td>
                                                 <span> {{ $item->waiting_time }} days</span>
                                             </td>
@@ -144,10 +139,7 @@
                                             <td>
                                                 <span>{{ $item->view_count }}</span>
                                             </td>
-                                            {{-- <td>
-                                                <span> {{ $item->created_at->format('j - M -Y') }} </span> |
 
-                                            </td> --}}
 
                                             <td class="bg-light">
                                                 <div class="table-data-feature d-flex justify-content-center">

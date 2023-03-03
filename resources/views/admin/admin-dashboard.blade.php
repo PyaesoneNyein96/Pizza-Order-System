@@ -84,7 +84,7 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        {{-- <i class="fa-solid fa-clipboard-list"></i> --}}
+
                                         <i class="fa-solid fa-comment-dots"></i>
                                     </div>
                                     <div class="text">
@@ -104,7 +104,7 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        {{-- <i class="fa-solid fa-clipboard-list"></i> --}}
+
                                         <i class="fa-solid fa-box-archive"></i>
                                     </div>
                                     <div class="text">
@@ -124,7 +124,7 @@
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
                                     <div class="icon">
-                                        {{-- <i class="fa-solid fa-clipboard-list"></i> --}}
+
                                         <i class="fa-solid fa-list-check"></i>
                                     </div>
                                     <div class="text">
